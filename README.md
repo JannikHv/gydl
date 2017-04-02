@@ -20,6 +20,8 @@ I will keep developing gydl in Python 3, until I can call it stable.
 
 Currently gydl just works, if there are flaws, please submit an issue.
 
+The code needs much improvement as I've been only concentrating on functionality, it's soon to be done though.
+
 # Usage
 
 The GUI will show an entry to put the URL in and two boxes which will let you choose the quality and format the video/audio should be downloaded in. As of now, gydl will download everything in your home folder. That will be changed later though.
