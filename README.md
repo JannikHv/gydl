@@ -11,7 +11,7 @@ Gydl currently only exists as one single script written in Python 3.
 To run it, you need to have the following dependencies installed:
 * gtk+3
 * python3
-* pyobject
+* pygobject
 
 # Future
 I will keep developing gydl in Python 3 until it's stable.
