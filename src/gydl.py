@@ -7,9 +7,10 @@ __maintainer__ = "Jannik Hauptvogel"
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
-from subprocess    import call as subcall
+from gi.repository import Gtk
+from gi.repository import Gdk
 from os            import getenv
+from subprocess    import call as subcall
 
 class GydlMessageGui(Gtk.Window):
 
@@ -53,24 +54,24 @@ class GydlMainGui(Gtk.Window):
 
         if status == 0:
             title   = ("Your download was successful")
-            message = ("Your " + Type + " has been downloaded successfully.\n" +
-                     "The file has been stored in " + getenv("HOME") + "/ .\n" +
-                     "Please press on continue to exit this program.")
+            message = ("Your " + Type + " has been downloaded successfully.\n"
+                       + "The file has been stored in " + getenv("HOME") + "/ .\n"
+                       + "Please press on continue to exit this program.")
 
             GydlMessageGui(title, message)
 
         else:
             title   = ("Your download was unsuccessful")
-            message = ("Your " + Type + " has not been downloaded.\n" + 
-                       "Please press on continue to exit this program.")
+            message = ("Your " + Type + " has not been downloaded.\n"
+                       + "Please press on continue to exit this program.")
 
             GydlMessageGui(title, message)
 
     def setDownloadVideo(self):
 
         # Prepare the command
-        cmd = ("youtube-dl --no-playlist -f FFF -f bestvideo[height=QQQ] " +
-               "-o \"~/%(title)s.%(ext)s\" \"UUU\"")
+        cmd = ("youtube-dl --no-playlist -f FFF -f bestvideo[height=QQQ] "
+               + "-o \"~/%(title)s.%(ext)s\" \"UUU\"")
 
         cmd = cmd.replace("FFF", self.vFormat.get_active_text())
         cmd = cmd.replace("QQQ", self.vQuality.get_active_text().replace("p", ""))
@@ -81,8 +82,8 @@ class GydlMainGui(Gtk.Window):
     def setDownloadAudio(self):
 
         # Prepare the command
-        cmd = ("youtube-dl --no-playlist -x --audio-format FFF " +
-               "--audio-quality QQQ -o \"~/%(title)s.%(ext)s\" \"UUU\"")
+        cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
+               + "--audio-quality QQQ -o \"~/%(title)s.%(ext)s\" \"UUU\"")
 
         if self.aFormat.get_active_text() == "ogg":
             cmd = cmd.replace("FFF", "vorbis")
@@ -103,8 +104,8 @@ class GydlMainGui(Gtk.Window):
         # Check if internet connection is present
         status = subcall("ping -c 1 google.com", shell=True)
         if status != 0:
-            GydlMessageGui("Connection Error", "No internet connection has been established.\n" +
-                                               "Please press on continue to exit this program.")
+            GydlMessageGui("Connection Error", "No internet connection has been established.\n"
+                                             + "Please press on continue to exit this program.")
         else:
             # Find out if Video or Audio is selected
             if self.stack.get_visible_child_name() == "A":
