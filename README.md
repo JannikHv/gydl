@@ -1,6 +1,8 @@
 # gydl
 gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing youtube-dl program.
 
+It's developed to be a dialog'ish GUI for quick video or audio downloads without disturbances.
+
 Big thank you to the developer(s) of youtube-dl, you can check out their project over here:
 
 https://github.com/rg3/youtube-dl
@@ -23,4 +25,12 @@ The code needs much improvement as I've been only concentrating on functionality
 # Usage
 The GUI will show an entry to put the URL in and two boxes which will let you choose the quality and format of the video/audio. As of now, gydl will download everything in your home folder. That will be changed later though.
 
-![alt tag](http://i.imgur.com/ojmkGzP.png)
+There are three different scenarios after **download** has been clicked.
+
+* Internet Connection Error
+* Download Unsuccessful
+* Download Successful
+
+These messages will appear as a window.
+
+![alt tag](http://i.imgur.com/8QeD4Ri.png)
