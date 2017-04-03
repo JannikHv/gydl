@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Gydl
+Categories=Network;Utility;AudioVideo;
+Encoding=UTF-8
+GenericName=Graphical Youtube-dl
+Icon=Youtube-youtube.com
+Type=Application
+Exec=/usr/bin/gydl
+Terminal=false
+Comment=Graphical interface to youtube-dl

@@ -14,25 +14,26 @@ from subprocess    import call as subcall
 
 class GydlMessageGui(Gtk.Window):
 
-    def getLayout(self, errMessage):
-        label = Gtk.Label(errMessage)
+    def getLayout(self, Message):
+        label = Gtk.Label(Message)
         return label
 
-    def getHeaderBar(self, errTitle):
+    def getHeaderBar(self, Title, Image):
 
         # Configuration of the headerbar
         hbar  = Gtk.HeaderBar()
-        label = Gtk.Label(errTitle)
+        label = Gtk.Label(Title)
         btn   = Gtk.Button(label="Continue")
         btn.connect("clicked", Gtk.main_quit)
 
         hbar.set_custom_title(label)
-        hbar.pack_end(btn)
+        hbar.pack_start      (Image)
+        hbar.pack_end        (btn)
         hbar.set_show_close_button(False)
 
         return hbar
 
-    def __init__(self, errTitle, errMessage):
+    def __init__(self, Title, Message, Image):
 
         # Configure the window
         Gtk.Window.__init__  (self)
@@ -40,10 +41,10 @@ class GydlMessageGui(Gtk.Window):
         self.set_resizable   (False)
         self.set_border_width(10)
         self.set_icon_name   ("Youtube-youtube.com")
-        self.set_titlebar    (self.getHeaderBar(errTitle))
+        self.set_titlebar    (self.getHeaderBar(Title, Image))
         self.set_position    (Gtk.WindowPosition.CENTER)
 
-        self.add(self.getLayout(errMessage))
+        self.add(self.getLayout(Message))
         self.connect("delete-event", Gtk.main_quit)
         self.show_all()
 
@@ -58,14 +59,18 @@ class GydlMainGui(Gtk.Window):
                        + "The file has been stored in " + getenv("HOME") + "/ .\n"
                        + "Please press on continue to exit this program.")
 
-            GydlMessageGui(title, message)
+            GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
+                                           "object-select-symbolic",
+                                           Gtk.IconSize.BUTTON))
 
         else:
             title   = ("Your download was unsuccessful")
             message = ("Your " + Type + " has not been downloaded.\n"
                        + "Please press on continue to exit this program.")
 
-            GydlMessageGui(title, message)
+            GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
+                                           "action-unavailable-symbolic",
+                                           Gtk.IconSize.BUTTON))
 
     def setDownloadVideo(self):
 
@@ -102,10 +107,15 @@ class GydlMainGui(Gtk.Window):
         Gdk.flush()
 
         # Check if internet connection is present
-        status = subcall("ping -c 1 google.com", shell=True)
+        status  = subcall("ping -c 1 google.com", shell=True)
+        title   = ("Connection Error")
+        message = ("No internet connection has been established.\n"
+                  + "Please press on continue to exit this program.")
         if status != 0:
-            GydlMessageGui("Connection Error", "No internet connection has been established.\n"
-                                             + "Please press on continue to exit this program.")
+            GydlMessageGui(title, message, 
+                           Gtk.Image.new_from_icon_name
+                           ("network-error-symbolic",
+                            Gtk.IconSize.BUTTON))
         else:
             # Find out if Video or Audio is selected
             if self.stack.get_visible_child_name() == "A":
@@ -139,6 +149,7 @@ class GydlMainGui(Gtk.Window):
         eLabel.set_markup("<big>Enter the URL</big>" )
         fLabel.set_markup("<big><u>Format</u></big>" )
         qLabel.set_markup("<big><u>Quality</u></big>")
+        self.vEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Sizing the widgets
         self.vEntry   .set_size_request(500, 30)
@@ -187,6 +198,7 @@ class GydlMainGui(Gtk.Window):
         eLabel.set_markup("<big>Enter the URL</big>" )
         fLabel.set_markup("<big><u>Format</u></big>" )
         qLabel.set_markup("<big><u>Quality</u></big>")
+        self.aEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Size the widgets
         self.aEntry  .set_size_request(500, 30)
