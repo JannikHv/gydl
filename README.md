@@ -1,5 +1,5 @@
-# gydl
-gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing youtube-dl program.
+# Gydl
+Gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing youtube-dl program.
 
 It's developed to be a dialog'ish GUI for quick video or audio downloads without disturbances.
 
@@ -16,7 +16,7 @@ To run it, you need to have the following dependencies installed:
 * pygobject
 
 # Future
-I will keep developing gydl in Python 3 until it's stable.
+I will keep developing gydl in Python 3 until it's stable. Perhaps, in the future, I will rewrite it in a more suitable language.
 
 Currently gydl just works, if there are flaws, please submit an issue.
 
