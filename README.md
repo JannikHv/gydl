@@ -36,4 +36,6 @@ These messages will appear as a window.
 ![alt tag](http://i.imgur.com/8QeD4Ri.png)
 
 
-- Jannik Hauptvogel
+Thanks for any involvement in this project.
+
+Kind regards, Jannik Hauptvogel.
