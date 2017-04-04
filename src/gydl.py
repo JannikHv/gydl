@@ -20,10 +20,10 @@ class GydlMessageGui(Gtk.Window):
 
     def getHeaderBar(self, Title, Image):
 
-        # Configuration of the headerbar
+        # Configure of the headerbar
         hbar  = Gtk.HeaderBar()
         label = Gtk.Label(Title)
-        btn   = Gtk.Button(label="Continue")
+        btn   = Gtk.Button(label="Done")
         btn.connect("clicked", Gtk.main_quit)
 
         hbar.set_custom_title(label)
@@ -51,22 +51,24 @@ class GydlMessageGui(Gtk.Window):
 class GydlMainGui(Gtk.Window):
 
     def setDownloadMain(self, Cmd, Type):
+
+        # Check if internet connection is present
         status = subcall(Cmd, shell=True)
 
         if status == 0:
-            title   = ("Your download was successful")
+            title   = ("Download Finished")
             message = ("Your " + Type + " has been downloaded successfully.\n"
                        + "The file has been stored in " + getenv("HOME") + "/ .\n"
-                       + "Please press on continue to exit this program.")
+                       + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
                                            "object-select-symbolic",
                                            Gtk.IconSize.BUTTON))
 
         else:
-            title   = ("Your download was unsuccessful")
+            title   = ("Download Unsuccessful")
             message = ("Your " + Type + " has not been downloaded.\n"
-                       + "Please press on continue to exit this program.")
+                       + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
                                            "action-unavailable-symbolic",
@@ -110,7 +112,7 @@ class GydlMainGui(Gtk.Window):
         status  = subcall("ping -c 1 google.com", shell=True)
         title   = ("Connection Error")
         message = ("No internet connection has been established.\n"
-                  + "Please press on continue to exit this program.")
+                  + "Please press on \"Done\" to exit this program.")
         if status != 0:
             GydlMessageGui(title, message, 
                            Gtk.Image.new_from_icon_name
@@ -151,7 +153,7 @@ class GydlMainGui(Gtk.Window):
         qLabel.set_markup("<big><u>Quality</u></big>")
         self.vEntry.set_placeholder_text("https://youtube.com/watch...")
 
-        # Sizing the widgets
+        # Size the widgets
         self.vEntry   .set_size_request(500, 30)
         self.vFormat  .set_size_request(250, 30)
         self.vQuality .set_size_request(250, 30)
@@ -221,7 +223,7 @@ class GydlMainGui(Gtk.Window):
     def getHeaderBar(self, switch):
 
         # Create download button
-        bDownload = Gtk.Button(label=" Download")
+        bDownload = Gtk.Button(label=("Download "))
         bDownload.connect("clicked", self.setDownloadPrepare)
         bDownload.set_always_show_image(True)
         bDownload.set_image_position(Gtk.PositionType.RIGHT)
@@ -229,11 +231,21 @@ class GydlMainGui(Gtk.Window):
                             "folder-download-symbolic",
                             Gtk.IconSize.BUTTON))
 
-        # Configuration of the headerbar
+        # Create leave button
+        bLeave = Gtk.Button(label=" Leave")
+        bLeave.connect("clicked", Gtk.main_quit)
+        bLeave.set_always_show_image(True)
+        bLeave.set_image_position(Gtk.PositionType.LEFT)
+        bLeave.set_image(Gtk.Image.new_from_icon_name(
+                         "go-home-symbolic",
+                         Gtk.IconSize.BUTTON))
+
+        # Configure of the headerbar
         hbar = Gtk.HeaderBar()
-        hbar.set_show_close_button(True)
+        hbar.set_show_close_button(False)
         hbar.set_custom_title(switch)
-        hbar.pack_end(bDownload)
+        hbar.pack_start(bLeave)
+        hbar.pack_end  (bDownload)
 
         return hbar
 
@@ -243,7 +255,7 @@ class GydlMainGui(Gtk.Window):
         switch = Gtk.StackSwitcher()
         self.stack  = Gtk.Stack()
 
-        # Configuring the window
+        # Configure the window
         Gtk.Window.__init__  (self)
         self.set_default_size(500, 250)
         self.set_resizable   (False)
