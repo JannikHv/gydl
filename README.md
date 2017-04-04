@@ -33,7 +33,7 @@ There are three different scenarios after **download** has been clicked.
 
 These messages will appear as a window.
 
-![alt tag](http://i.imgur.com/8QeD4Ri.png)
+![alt tag](http://i.imgur.com/GoOSEsd.png)
 
 
 Thanks for any involvement in this project.
