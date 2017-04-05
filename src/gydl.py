@@ -12,6 +12,10 @@ from gi.repository import Gdk
 from os            import getenv
 from subprocess    import call as subcall
 
+# Prepare Css style
+
+
+
 class GydlMessageGui(Gtk.Window):
 
     def getLayout(self, Message):
@@ -223,9 +227,10 @@ class GydlMainGui(Gtk.Window):
     def getHeaderBar(self, switch):
 
         # Create download button
-        bDownload = Gtk.Button(label=("Download "))
+        bDownload = Gtk.Button(label=(" Download "))
         bDownload.connect("clicked", self.setDownloadPrepare)
         bDownload.set_always_show_image(True)
+        bDownload.get_style_context().add_class("download")
         bDownload.set_image_position(Gtk.PositionType.RIGHT)
         bDownload.set_image(Gtk.Image.new_from_icon_name(
                             "folder-download-symbolic",
@@ -240,6 +245,8 @@ class GydlMainGui(Gtk.Window):
                          "go-home-symbolic",
                          Gtk.IconSize.BUTTON))
 
+
+
         # Configure of the headerbar
         hbar = Gtk.HeaderBar()
         hbar.set_show_close_button(False)
@@ -248,6 +255,26 @@ class GydlMainGui(Gtk.Window):
         hbar.pack_end  (bDownload)
 
         return hbar
+
+    def setStyle(self):
+        GydlStyle = """
+        button.download {
+            background: #5baad2;
+            color: white;
+        }
+
+        button.download:hover {
+            background: #7ebedd;
+            color: white;
+        }
+        """
+        cssProv = Gtk.CssProvider()
+        cssProv.load_from_data(bytes(GydlStyle.encode()))
+
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+                                                 cssProv,
+                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
 
     def __init__(self):
 
@@ -268,6 +295,8 @@ class GydlMainGui(Gtk.Window):
         self.stack.add_titled(self.getVideoArea() , "V", "Video" )
         switch.set_stack(self.stack)
         self.add(self.stack)
+
+        self.setStyle()
 
 
 
