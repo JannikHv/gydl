@@ -80,7 +80,7 @@ class GydlMainGui(Gtk.Window):
     def setDownloadVideo(self):
 
         # Prepare the command
-        cmd = ("youtube-dl --no-playlist -f FFF -f bestvideo[height=QQQ] "
+        cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
                + "-o \"~/%(title)s.%(ext)s\" \"UUU\"")
 
         cmd = cmd.replace("FFF", self.vFormat.get_active_text())
@@ -259,7 +259,7 @@ class GydlMainGui(Gtk.Window):
         GydlStyle = """
         button.download {
             background: #5baad2;
-            color: white;
+            color: #ffffff;
         }
 
         button.download:hover {
