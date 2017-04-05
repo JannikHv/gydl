@@ -12,8 +12,6 @@ from gi.repository import Gdk
 from os            import getenv
 from subprocess    import call as subcall
 
-# Prepare Css style
-
 
 
 class GydlMessageGui(Gtk.Window):
@@ -29,6 +27,7 @@ class GydlMessageGui(Gtk.Window):
         label = Gtk.Label(Title)
         btn   = Gtk.Button(label="Done")
         btn.connect("clicked", Gtk.main_quit)
+        btn.get_style_context().add_class("download")
 
         hbar.set_custom_title(label)
         hbar.pack_start      (Image)
@@ -245,8 +244,6 @@ class GydlMainGui(Gtk.Window):
                          "go-home-symbolic",
                          Gtk.IconSize.BUTTON))
 
-
-
         # Configure of the headerbar
         hbar = Gtk.HeaderBar()
         hbar.set_show_close_button(False)
@@ -257,6 +254,8 @@ class GydlMainGui(Gtk.Window):
         return hbar
 
     def setStyle(self):
+
+        # Prepare the Css data
         GydlStyle = """
         button.download {
             background: #5baad2;
@@ -268,13 +267,14 @@ class GydlMainGui(Gtk.Window):
             color: white;
         }
         """
+
+        # Setup the CssProvider
         cssProv = Gtk.CssProvider()
         cssProv.load_from_data(bytes(GydlStyle.encode()))
 
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
                                                  cssProv,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-
 
     def __init__(self):
 
