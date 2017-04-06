@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 __author__     = "Jannik Hauptvogel"
+__maintainer__ = "Jannik Hauptvogel"
+__email__      = "JannikHv@gmail.com"
 __credits__    = "rg3"
 __license__    = "MIT"
-__maintainer__ = "Jannik Hauptvogel"
+
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -17,24 +19,24 @@ from subprocess    import call as subcall
 class GydlMessageGui(Gtk.Window):
 
     def getLayout(self, Message):
-        label = Gtk.Label(Message)
-        return label
+        Label = Gtk.Label(Message)
+        return Label
 
     def getHeaderBar(self, Title, Image):
 
         # Configure of the headerbar
-        hbar  = Gtk.HeaderBar()
-        label = Gtk.Label(Title)
-        btn   = Gtk.Button(label="Done")
-        btn.connect("clicked", Gtk.main_quit)
-        btn.get_style_context().add_class("download")
+        hBar  = Gtk.HeaderBar()
+        Label = Gtk.Label(Title)
+        Btn   = Gtk.Button(label="Done")
+        Btn.connect("clicked", Gtk.main_quit)
+        Btn.get_style_context().add_class("download")
 
-        hbar.set_show_close_button(False)
-        hbar.set_custom_title(label)
-        hbar.pack_start      (Image)
-        hbar.pack_end        (btn)
+        hBar.set_show_close_button(False)
+        hBar.set_custom_title(Label)
+        hBar.pack_start      (Image)
+        hBar.pack_end        (Btn)
 
-        return hbar
+        return hBar
 
     def __init__(self, Title, Message, Image):
 
@@ -56,81 +58,81 @@ class GydlMainGui(Gtk.Window):
     def setDownloadMain(self, Cmd, Type):
 
         # Check if internet connection is present
-        status = subcall(Cmd, shell=True)
+        Status = subcall(Cmd, shell=True)
 
-        if status == 0:
-            title   = ("Download Finished")
-            message = ("Your "
+        if Status == 0:
+            Title   = ("Download Finished")
+            Message = ("Your "
                        + Type
                        + " has been downloaded successfully.\n"
                        + "The file has been stored in "
                        + getenv("HOME") + "/ .\n"
                        + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
+            GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
                                            "object-select-symbolic",
                                            Gtk.IconSize.BUTTON))
 
         else:
-            title   = ("Download Unsuccessful")
-            message = ("Your "
+            Title   = ("Download Unsuccessful")
+            Message = ("Your "
                       + Type
                       + " has not been downloaded.\n"
                       + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
+            GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
                                            "action-unavailable-symbolic",
                                            Gtk.IconSize.BUTTON))
 
     def setDownloadVideo(self):
 
         # Prepare the command
-        cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
+        Cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
                + "-o \"~/%(title)s.%(ext)s\" \"UUU\"")
 
-        cmd = cmd.replace("FFF", self.vFormat.get_active_text())
-        cmd = cmd.replace("QQQ", self.vQuality.get_active_text().replace("p", ""))
-        cmd = cmd.replace("UUU", self.vEntry.get_text())
+        Cmd = Cmd.replace("FFF", self.vFormat.get_active_text())
+        Cmd = Cmd.replace("QQQ", self.vQuality.get_active_text().replace("p", ""))
+        Cmd = Cmd.replace("UUU", self.vEntry.get_text())
 
-        self.setDownloadMain(cmd, "video")
+        self.setDownloadMain(Cmd, "video")
 
     def setDownloadAudio(self):
 
         # Prepare the command
-        cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
+        Cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
                + "--audio-quality QQQ -o \"~/%(title)s.%(ext)s\" \"UUU\"")
 
         if self.aFormat.get_active_text() == "ogg":
-            cmd = cmd.replace("FFF", "vorbis")
+            Cmd = Cmd.replace("FFF", "vorbis")
         else:
-            cmd = cmd.replace("FFF", self.aFormat.get_active_text())
+            Cmd = Cmd.replace("FFF", self.aFormat.get_active_text())
 
-        cmd = cmd.replace("QQQ", self.aQuality.get_active_text()[0])
-        cmd = cmd.replace("UUU", self.aEntry.get_text())
+        Cmd = Cmd.replace("QQQ", self.aQuality.get_active_text()[0])
+        Cmd = Cmd.replace("UUU", self.aEntry.get_text())
 
-        self.setDownloadMain(cmd, "audio")
+        self.setDownloadMain(Cmd, "audio")
 
-    def setDownloadPrepare(self, widget):
+    def setDownloadPrepare(self, widget, Stack):
 
         # Hide the main window
         self.hide()
         Gdk.flush()
 
         # Check if internet connection is present
-        status  = subcall("ping -c 1 google.com", shell=True)
+        Status  = subcall("ping -c 1 google.com", shell=True)
 
-        if status != 0:
-            title   = ("Connection Error")
-            message = ("No internet connection has been established.\n"
+        if Status != 0:
+            Title   = ("Connection Error")
+            Message = ("No internet connection has been established.\n"
                        + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(title, message, 
+            GydlMessageGui(Title, Message, 
                            Gtk.Image.new_from_icon_name
                            ("network-error-symbolic",
                             Gtk.IconSize.BUTTON))
         else:
             # Find out if Video or Audio is selected
-            if self.stack.get_visible_child_name() == "A":
+            if Stack.get_visible_child_name() == "A":
                 self.setDownloadAudio()
             else:
                 self.setDownloadVideo()
@@ -144,7 +146,7 @@ class GydlMainGui(Gtk.Window):
         eLabel         = Gtk.Label()
         fLabel         = Gtk.Label()
         qLabel         = Gtk.Label()
-        fix            = Gtk.Fixed()
+        Fix            = Gtk.Fixed()
 
         # Add entries to comboboxes
         for i in ["3gp", "flv", "mp4", "webm"]:
@@ -173,14 +175,14 @@ class GydlMainGui(Gtk.Window):
         qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
-        fix.put(self.vEntry,   0,   50 )
-        fix.put(self.vFormat,  0,   140)
-        fix.put(self.vQuality, 250, 140)
-        fix.put(eLabel,        0,   10 )
-        fix.put(fLabel,        0,   105)
-        fix.put(qLabel,        250, 105)
+        Fix.put(self.vEntry,   0,   50 )
+        Fix.put(self.vFormat,  0,   140)
+        Fix.put(self.vQuality, 250, 140)
+        Fix.put(eLabel,        0,   10 )
+        Fix.put(fLabel,        0,   105)
+        Fix.put(qLabel,        250, 105)
 
-        return fix
+        return Fix
 
     def getAudioArea(self):
 
@@ -191,7 +193,7 @@ class GydlMainGui(Gtk.Window):
         eLabel         = Gtk.Label()
         fLabel         = Gtk.Label()
         qLabel         = Gtk.Label()
-        fix            = Gtk.Fixed()
+        Fix            = Gtk.Fixed()
 
         # Add entries to comboboxes
         for i in ["aac", "m4a", "mp3", "ogg", "wav"]:
@@ -222,20 +224,20 @@ class GydlMainGui(Gtk.Window):
         qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
-        fix.put(self.aEntry,   0,   50 )
-        fix.put(self.aFormat,  0,   140)
-        fix.put(self.aQuality, 250, 140)
-        fix.put(eLabel,        0,   10 )
-        fix.put(fLabel,        0,   105)
-        fix.put(qLabel,        250, 105)
+        Fix.put(self.aEntry,   0,   50 )
+        Fix.put(self.aFormat,  0,   140)
+        Fix.put(self.aQuality, 250, 140)
+        Fix.put(eLabel,        0,   10 )
+        Fix.put(fLabel,        0,   105)
+        Fix.put(qLabel,        250, 105)
 
-        return fix
+        return Fix
 
-    def getHeaderBar(self, switch):
+    def getHeaderBar(self, Switch, Stack):
 
         # Create download button
         bDownload = Gtk.Button(label=(" Download "))
-        bDownload.connect("clicked", self.setDownloadPrepare)
+        bDownload.connect("clicked", self.setDownloadPrepare, Stack)
         bDownload.set_always_show_image(True)
         bDownload.get_style_context().add_class("download")
         bDownload.set_image_position(Gtk.PositionType.RIGHT)
@@ -245,7 +247,7 @@ class GydlMainGui(Gtk.Window):
 
         # Create leave button
         bLeave = Gtk.Button(label=" Leave")
-        bLeave.connect("clicked", Gtk.main_quit)
+        bLeave.connect("clicked", Gtk.main_quit, None)
         bLeave.set_always_show_image(True)
         bLeave.set_image_position(Gtk.PositionType.LEFT)
         bLeave.set_image(Gtk.Image.new_from_icon_name(
@@ -253,13 +255,13 @@ class GydlMainGui(Gtk.Window):
                          Gtk.IconSize.BUTTON))
 
         # Configure of the headerbar
-        hbar = Gtk.HeaderBar()
-        hbar.set_show_close_button(False)
-        hbar.set_custom_title(switch)
-        hbar.pack_start(bLeave)
-        hbar.pack_end  (bDownload)
+        hBar = Gtk.HeaderBar()
+        hBar.set_show_close_button(False)
+        hBar.set_custom_title(Switch)
+        hBar.pack_start(bLeave)
+        hBar.pack_end  (bDownload)
 
-        return hbar
+        return hBar
 
     def setStyle(self):
 
@@ -287,8 +289,8 @@ class GydlMainGui(Gtk.Window):
     def __init__(self):
 
         # Declare main variables
-        switch = Gtk.StackSwitcher()
-        self.stack  = Gtk.Stack()
+        Switch = Gtk.StackSwitcher()
+        Stack  = Gtk.Stack()
 
         # Configure the window
         Gtk.Window.__init__  (self)
@@ -296,13 +298,13 @@ class GydlMainGui(Gtk.Window):
         self.set_resizable   (False)
         self.set_border_width(10)
         self.set_icon_name   ("Youtube-youtube.com")
-        self.set_titlebar    (self.getHeaderBar(switch))
+        self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
 
-        self.stack.add_titled(self.getAudioArea() , "A", "Audio" )
-        self.stack.add_titled(self.getVideoArea() , "V", "Video" )
-        switch.set_stack(self.stack)
-        self.add(self.stack)
+        Stack.add_titled(self.getAudioArea() , "A", "Audio" )
+        Stack.add_titled(self.getVideoArea() , "V", "Video" )
+        Switch.set_stack(Stack)
+        self.add(Stack)
         self.setStyle()
 
 
