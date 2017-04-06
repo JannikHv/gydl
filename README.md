@@ -37,7 +37,7 @@ When clicking on **Download** there are 3 scenarious you can face:
 
 * Download Successful      - When your download was finished successfully.
 
-![alt tag](http://imgur.com/pQLJLVP)
+![alt tag](http://i.imgur.com/pQLJLVP.png)
 
 * Download Unsuccessful    - When a bad URL was entered or similar errors occured.
 
