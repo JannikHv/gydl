@@ -4,9 +4,11 @@
 
 __author__     = "Jannik Hauptvogel"
 __maintainer__ = "Jannik Hauptvogel"
+__twitter__    = "https://twitter.com/TheJannikHa"
 __email__      = "JannikHv@gmail.com"
+__git__        = "https://github.com/JannikHv/gydl"
 __credits__    = "rg3"
-__license__    = "MIT"
+__license__    = "GPLv2"
 
 
 
@@ -146,7 +148,7 @@ class GydlMainGui(Gtk.Window):
 
         except Exception:
 
-            # Show Connection error dialog and quit
+            # Show Connection error dialog
             Title   = ("Connection Error")
             Message = ("No internet connection has been established.\n"
                        + "Please press on \"Done\" to exit this program.")
