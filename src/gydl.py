@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+
+
 __author__     = "Jannik Hauptvogel"
 __maintainer__ = "Jannik Hauptvogel"
 __email__      = "JannikHv@gmail.com"
@@ -7,16 +9,21 @@ __credits__    = "rg3"
 __license__    = "MIT"
 
 
+
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import Gio
 from os            import getenv
 from subprocess    import call as subcall
 
 
 
 class GydlMessageGui(Gtk.Window):
+
+    def setCloseWindow(self, widget):
+        self.close()
 
     def getLayout(self, Message):
         Label = Gtk.Label(Message)
@@ -28,9 +35,15 @@ class GydlMessageGui(Gtk.Window):
         hBar  = Gtk.HeaderBar()
         Label = Gtk.Label(Title)
         Btn   = Gtk.Button(label="Done")
-        Btn.connect("clicked", Gtk.main_quit)
         Btn.get_style_context().add_class("download")
 
+        # If a connection error occurs solely close the dialog
+        if Title[0] == "C":
+            Btn.connect("clicked", self.setCloseWindow)
+        else:
+            Btn.connect("clicked", Gtk.main_quit)
+
+        # Configure the headerbar
         hBar.set_show_close_button(False)
         hBar.set_custom_title(Label)
         hBar.pack_start      (Image)
@@ -50,14 +63,15 @@ class GydlMessageGui(Gtk.Window):
         self.set_position    (Gtk.WindowPosition.CENTER)
 
         self.add(self.getLayout(Message))
-        self.connect("delete-event", Gtk.main_quit)
         self.show_all()
+
+
 
 class GydlMainGui(Gtk.Window):
 
     def setDownloadMain(self, Cmd, Type):
 
-        # Check if internet connection is present
+        # Starts the main download calling youtube-dl
         Status = subcall(Cmd, shell=True)
 
         if Status == 0:
@@ -114,14 +128,25 @@ class GydlMainGui(Gtk.Window):
 
     def setDownloadPrepare(self, widget, Stack):
 
-        # Hide the main window
-        self.hide()
-        Gdk.flush()
+        # Check internet connection
+        try:
+            Gio.NetworkMonitor.can_reach(Gio.NetworkMonitor.get_default(),
+                                         Gio.NetworkAddress.new("google.com", 0),
+                                         Gio.Cancellable.new())
 
-        # Check if internet connection is present
-        Status  = subcall("ping -c 1 google.com", shell=True)
+            # Hide the main window
+            self.hide()
+            Gdk.flush()
 
-        if Status != 0:
+            # Procceed to either Video or Audio download
+            if Stack.get_visible_child_name() == "A":
+                self.setDownloadAudio()
+            else:
+                self.setDownloadVideo()
+
+        except Exception:
+
+            # Show Connection error dialog and quit
             Title   = ("Connection Error")
             Message = ("No internet connection has been established.\n"
                        + "Please press on \"Done\" to exit this program.")
@@ -130,12 +155,6 @@ class GydlMainGui(Gtk.Window):
                            Gtk.Image.new_from_icon_name
                            ("network-error-symbolic",
                             Gtk.IconSize.BUTTON))
-        else:
-            # Find out if Video or Audio is selected
-            if Stack.get_visible_child_name() == "A":
-                self.setDownloadAudio()
-            else:
-                self.setDownloadVideo()
 
     def getVideoArea(self):
 
@@ -254,7 +273,7 @@ class GydlMainGui(Gtk.Window):
                          "go-home-symbolic",
                          Gtk.IconSize.BUTTON))
 
-        # Configure of the headerbar
+        # Configure the headerbar
         hBar = Gtk.HeaderBar()
         hBar.set_show_close_button(False)
         hBar.set_custom_title(Switch)
@@ -269,12 +288,12 @@ class GydlMainGui(Gtk.Window):
         GydlStyle = """
         button.download {
             background: #5baad2;
-            color: #ffffff;
+            color:      #ffffff;
         }
 
         button.download:hover {
             background: #7ebedd;
-            color: white;
+            color:      #ffffff;
         }
         """
 
