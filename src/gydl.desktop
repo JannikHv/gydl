@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Gydl
-Categories=Network;Utility;AudioVideo;
+Categories=AudioVideo;
 Encoding=UTF-8
 GenericName=Graphical Youtube-dl
 Icon=Youtube-youtube.com

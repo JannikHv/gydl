@@ -29,10 +29,10 @@ class GydlMessageGui(Gtk.Window):
         btn.connect("clicked", Gtk.main_quit)
         btn.get_style_context().add_class("download")
 
+        hbar.set_show_close_button(False)
         hbar.set_custom_title(label)
         hbar.pack_start      (Image)
         hbar.pack_end        (btn)
-        hbar.set_show_close_button(False)
 
         return hbar
 
@@ -60,8 +60,11 @@ class GydlMainGui(Gtk.Window):
 
         if status == 0:
             title   = ("Download Finished")
-            message = ("Your " + Type + " has been downloaded successfully.\n"
-                       + "The file has been stored in " + getenv("HOME") + "/ .\n"
+            message = ("Your "
+                       + Type
+                       + " has been downloaded successfully.\n"
+                       + "The file has been stored in "
+                       + getenv("HOME") + "/ .\n"
                        + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
@@ -70,8 +73,10 @@ class GydlMainGui(Gtk.Window):
 
         else:
             title   = ("Download Unsuccessful")
-            message = ("Your " + Type + " has not been downloaded.\n"
-                       + "Please press on \"Done\" to exit this program.")
+            message = ("Your "
+                      + Type
+                      + " has not been downloaded.\n"
+                      + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(title, message, Gtk.Image.new_from_icon_name(
                                            "action-unavailable-symbolic",
@@ -113,10 +118,12 @@ class GydlMainGui(Gtk.Window):
 
         # Check if internet connection is present
         status  = subcall("ping -c 1 google.com", shell=True)
-        title   = ("Connection Error")
-        message = ("No internet connection has been established.\n"
-                  + "Please press on \"Done\" to exit this program.")
+
         if status != 0:
+            title   = ("Connection Error")
+            message = ("No internet connection has been established.\n"
+                       + "Please press on \"Done\" to exit this program.")
+
             GydlMessageGui(title, message, 
                            Gtk.Image.new_from_icon_name
                            ("network-error-symbolic",
@@ -154,23 +161,24 @@ class GydlMainGui(Gtk.Window):
         eLabel.set_markup("<big>Enter the URL</big>" )
         fLabel.set_markup("<big><u>Format</u></big>" )
         qLabel.set_markup("<big><u>Quality</u></big>")
+
         self.vEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Size the widgets
-        self.vEntry   .set_size_request(500, 30)
-        self.vFormat  .set_size_request(250, 30)
-        self.vQuality .set_size_request(250, 30)
-        eLabel        .set_size_request(500, 30)
-        fLabel        .set_size_request(250, 30)
-        qLabel        .set_size_request(250, 30)
+        self.vEntry  .set_size_request(500, 30)
+        self.vFormat .set_size_request(250, 30)
+        self.vQuality.set_size_request(250, 30)
+        eLabel       .set_size_request(500, 30)
+        fLabel       .set_size_request(250, 30)
+        qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
-        fix.put(self.vEntry,    0,   50 )
-        fix.put(self.vFormat,   0,   140)
-        fix.put(self.vQuality,  250, 140)
-        fix.put(eLabel,         0,   10 )
-        fix.put(fLabel,         0,   105)
-        fix.put(qLabel,         250, 105)
+        fix.put(self.vEntry,   0,   50 )
+        fix.put(self.vFormat,  0,   140)
+        fix.put(self.vQuality, 250, 140)
+        fix.put(eLabel,        0,   10 )
+        fix.put(fLabel,        0,   105)
+        fix.put(qLabel,        250, 105)
 
         return fix
 
@@ -214,12 +222,12 @@ class GydlMainGui(Gtk.Window):
         qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
-        fix.put(self.aEntry,    0,   50 )
-        fix.put(self.aFormat,   0,   140)
-        fix.put(self.aQuality,  250, 140)
-        fix.put(eLabel,         0,   10 )
-        fix.put(fLabel,         0,   105)
-        fix.put(qLabel,         250, 105)
+        fix.put(self.aEntry,   0,   50 )
+        fix.put(self.aFormat,  0,   140)
+        fix.put(self.aQuality, 250, 140)
+        fix.put(eLabel,        0,   10 )
+        fix.put(fLabel,        0,   105)
+        fix.put(qLabel,        250, 105)
 
         return fix
 
@@ -295,7 +303,6 @@ class GydlMainGui(Gtk.Window):
         self.stack.add_titled(self.getVideoArea() , "V", "Video" )
         switch.set_stack(self.stack)
         self.add(self.stack)
-
         self.setStyle()
 
 
