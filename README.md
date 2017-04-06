@@ -36,8 +36,16 @@ Each of these options have a Text Entry, a Quality Combobox and a Format Combobo
 When clicking on **Download** there are 3 scenarious you can face:
 
 * Download Successful      - When your download was finished successfully.
+
+![alt tag](http://imgur.com/pQLJLVP)
+
 * Download Unsuccessful    - When a bad URL was entered or similar errors occured.
+
+![alt tag](http://i.imgur.com/yRdpYUU.png)
+
 * Internet Conection Error - When no internet connection could be established.
+
+![alt tag](http://i.imgur.com/zcJedAp.png)
 
 These dialogs will be presented to you as a little dialog'ish windows.
 
