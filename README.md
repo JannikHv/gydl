@@ -21,7 +21,7 @@ To run it you need to have installed:
 
 [AffeAli](https://github.com/AffeAli) has created an [AUR Package](https://aur.archlinux.org/packages/gydl-git/) for Gydl, so you can install it by:
 
-*yaourt -S gydl-git*
+*$ yaourt -S gydl-git*
 
 Big thanks to him.
 
