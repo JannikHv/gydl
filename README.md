@@ -1,41 +1,46 @@
-# Gydl
+# About
 Gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing youtube-dl program.
 
-It's developed to be a dialog'ish GUI for quick video or audio downloads without disturbances.
+It's developed to be a dialog'ish GUI for quick and easy video or audio downloads without disturbances.
 
-Big thank you to the developer(s) of youtube-dl, you can check out their project over here:
+Big **thank you** to the developer(s) of youtube-dl! Check out their project:
 
 https://github.com/rg3/youtube-dl
 
 # Installation and dependencies
-Gydl currently only exists as one single script written in Python 3.
 
-To run it, you need to have the following dependencies installed:
-* gtk+3
-* python3
-* pygobject
+Gydl is written in Python3 and uses the Gtk+3 toolkit.
 
-# Future
-I will keep developing gydl in Python 3 until it's stable. Perhaps, in the future, I will rewrite it in a more suitable language.
+To run it you need to have installed:
 
-Currently gydl just works, if there are flaws, please submit an issue.
+* Gtk+3
+* Python3
+* PyGobject
 
-The code is written to be readable and easy to develope onto.
+**ArchLinux:**
+
+[AffeAli](https://github.com/AffeAli) has created an [AUR Package](https://aur.archlinux.org/packages/gydl-git/) for Gydl, so you can install it by:
+
+*yaourt -S gydl-git*
+
+Big thanks to him.
 
 # Usage
-The GUI will show an entry to put the URL in and two boxes which will let you choose the quality and format of the video/audio. As of now, gydl will download everything in your home folder. That will be changed later though.
 
-There are three different scenarios after **download** has been clicked.
+When using Gydl, you have the option to download your Youtube Video as a **Video** or **Audio**.
 
-* Internet Connection Error
-* Download Unsuccessful
-* Download Successful
+Each of these options have a Text Entry, a Quality Combobox and a Format Combobox.
 
-These messages will appear as a window.
+When clicking on **Download** there are 3 scenarious you can face:
+
+* Download Successful      - When your download was finished successfully.
+* Download Unsuccessful    - When a bad URL was entered or similar errors occured.
+* Internet Conection Error - When no internet connection could be established.
+
+These dialogs will be presented to you as a little dialog'ish window.
 
 ![alt tag](http://i.imgur.com/rRPfQAQ.png)
 
-
-Thanks for any involvement in this project.
+Thanks for any involvement in this project, I hope you like it.
 
 Kind regards, Jannik Hauptvogel.
