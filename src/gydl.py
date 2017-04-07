@@ -24,7 +24,7 @@ from subprocess    import call as subcall
 
 class GydlMessageGui(Gtk.Window):
 
-    def closeWindow(self, widget):
+    def closeWindow(self, Widget, Data):
         self.close()
 
     def getLayout(self, Message):
