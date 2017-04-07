@@ -32,7 +32,7 @@ When using Gydl, you have the option to download your Youtube Video as a **Video
 
 Each of these options have a text entry, as well as 2 comboboxes managing quality and the format.
 
-![alt tag](http://i.imgur.com/rRPfQAQ.png)
+![alt tag](http://i.imgur.com/ACvm9wO.png)
 
 When clicking on **Download** there are 3 scenarious you can face:
 
@@ -46,7 +46,7 @@ When clicking on **Download** there are 3 scenarious you can face:
 
 * Internet Connection Error - When no internet connection could be established.
 
-![alt tag](http://i.imgur.com/zcJedAp.png)
+![alt tag](http://i.imgur.com/WJB76zZ.png)
 
 These dialogs will be presented to you as a little dialog'ish windows.
 
