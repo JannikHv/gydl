@@ -24,7 +24,7 @@ from subprocess    import call as subcall
 
 class GydlMessageGui(Gtk.Window):
 
-    def setCloseWindow(self, widget):
+    def closeWindow(self, widget):
         self.close()
 
     def getLayout(self, Message):
@@ -41,15 +41,15 @@ class GydlMessageGui(Gtk.Window):
 
         # If a connection error occurs solely close the dialog
         if Title[0] == "C":
-            Btn.connect("clicked", self.setCloseWindow)
+            Btn.connect("clicked", self.closeWindow)
         else:
             Btn.connect("clicked", Gtk.main_quit)
 
         # Configure the headerbar
         hBar.set_show_close_button(False)
-        hBar.set_custom_title(Label)
-        hBar.pack_start      (Image)
-        hBar.pack_end        (Btn)
+        hBar.set_custom_title     (Label)
+        hBar.pack_start           (Image)
+        hBar.pack_end             (Btn)
 
         return hBar
 
@@ -71,9 +71,9 @@ class GydlMessageGui(Gtk.Window):
 
 class GydlMainGui(Gtk.Window):
 
-    def setDownloadMain(self, Cmd, Type):
+    def downloadMain(self, Cmd, Type):
 
-        # Starts the main download calling youtube-dl
+        # Start the main download calling youtube-dl
         Status = subcall(Cmd, shell=True)
 
         if Status == 0:
@@ -100,7 +100,7 @@ class GydlMainGui(Gtk.Window):
                                            "action-unavailable-symbolic",
                                            Gtk.IconSize.BUTTON))
 
-    def setDownloadVideo(self):
+    def downloadVideo(self):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
@@ -110,9 +110,9 @@ class GydlMainGui(Gtk.Window):
         Cmd = Cmd.replace("QQQ", self.vQuality.get_active_text().replace("p", ""))
         Cmd = Cmd.replace("UUU", self.vEntry.get_text())
 
-        self.setDownloadMain(Cmd, "video")
+        self.downloadMain(Cmd, "video")
 
-    def setDownloadAudio(self):
+    def downloadAudio(self):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
@@ -126,9 +126,9 @@ class GydlMainGui(Gtk.Window):
         Cmd = Cmd.replace("QQQ", self.aQuality.get_active_text()[0])
         Cmd = Cmd.replace("UUU", self.aEntry.get_text())
 
-        self.setDownloadMain(Cmd, "audio")
+        self.downloadMain(Cmd, "audio")
 
-    def setDownloadPrepare(self, widget, Stack):
+    def prepareDownload(self, widget, Stack):
 
         # Check internet connection
         try:
@@ -142,9 +142,9 @@ class GydlMainGui(Gtk.Window):
 
             # Procceed to either Video or Audio download
             if Stack.get_visible_child_name() == "A":
-                self.setDownloadAudio()
+                self.downloadAudio()
             else:
-                self.setDownloadVideo()
+                self.downloadVideo()
 
         except Exception:
 
@@ -234,6 +234,7 @@ class GydlMainGui(Gtk.Window):
         eLabel.set_markup("<big>Enter the URL</big>" )
         fLabel.set_markup("<big><u>Format</u></big>" )
         qLabel.set_markup("<big><u>Quality</u></big>")
+
         self.aEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Size the widgets
@@ -258,7 +259,7 @@ class GydlMainGui(Gtk.Window):
 
         # Create download button
         bDownload = Gtk.Button(label=(" Download "))
-        bDownload.connect("clicked", self.setDownloadPrepare, Stack)
+        bDownload.connect("clicked", self.prepareDownload, Stack)
         bDownload.set_always_show_image(True)
         bDownload.get_style_context().add_class("download")
         bDownload.set_image_position(Gtk.PositionType.RIGHT)
@@ -280,7 +281,7 @@ class GydlMainGui(Gtk.Window):
         hBar.set_show_close_button(False)
         hBar.set_custom_title(Switch)
         hBar.pack_start(bLeave)
-        hBar.pack_end  (bDownload)
+        hBar.pack_end(bDownload)
 
         return hBar
 
