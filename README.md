@@ -13,9 +13,10 @@ Gydl is written in Python3 and uses the Gtk+3 toolkit.
 
 To run it you need to have installed:
 
-* Gtk+3
-* Python3
-* PyGobject
+* gtk+3
+* python3
+* pyGobject
+* youtube-dl
 
 **ArchLinux:**
 
@@ -29,13 +30,13 @@ Big thanks to him.
 
 When using Gydl, you have the option to download your Youtube Video as a **Video** or **Audio**.
 
-Each of these options have a Text Entry, a Quality Combobox and a Format Combobox.
+Each of these options have a text entry, as well as 2 comboboxes managing quality and the format.
 
 ![alt tag](http://i.imgur.com/rRPfQAQ.png)
 
 When clicking on **Download** there are 3 scenarious you can face:
 
-* Download Successful      - When your download was finished successfully.
+* Download Successful      - When your download has finished successfully.
 
 ![alt tag](http://i.imgur.com/pQLJLVP.png)
 
@@ -43,7 +44,7 @@ When clicking on **Download** there are 3 scenarious you can face:
 
 ![alt tag](http://i.imgur.com/yRdpYUU.png)
 
-* Internet Conection Error - When no internet connection could be established.
+* Internet Connection Error - When no internet connection could be established.
 
 ![alt tag](http://i.imgur.com/zcJedAp.png)
 
