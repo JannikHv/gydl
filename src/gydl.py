@@ -41,9 +41,9 @@ class GydlMessageGui(Gtk.Window):
 
         # If a connection error occurs solely close the dialog
         if Title[0] == "C":
-            Btn.connect("clicked", self.closeWindow)
+            Btn.connect("clicked", self.closeWindow, None)
         else:
-            Btn.connect("clicked", Gtk.main_quit)
+            Btn.connect("clicked", Gtk.main_quit, None)
 
         # Configure the headerbar
         hBar.set_show_close_button(False)
@@ -92,9 +92,9 @@ class GydlMainGui(Gtk.Window):
         else:
             Title   = ("Download Unsuccessful")
             Message = ("Your "
-                      + Type
-                      + " has not been downloaded.\n"
-                      + "Please press on \"Done\" to exit this program.")
+                       + Type
+                       + " has not been downloaded.\n"
+                       + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
                                            "action-unavailable-symbolic",
@@ -164,9 +164,9 @@ class GydlMainGui(Gtk.Window):
         self.vEntry    = Gtk.Entry()
         self.vFormat   = Gtk.ComboBoxText()
         self.vQuality  = Gtk.ComboBoxText()
-        eLabel         = Gtk.Label()
-        fLabel         = Gtk.Label()
-        qLabel         = Gtk.Label()
+        eLabel         = Gtk.Label("")
+        fLabel         = Gtk.Label("")
+        qLabel         = Gtk.Label("")
         Fix            = Gtk.Fixed()
 
         # Add entries to comboboxes
@@ -181,27 +181,27 @@ class GydlMainGui(Gtk.Window):
         self.vQuality.set_active(3)
 
         # Add text to widgets
-        eLabel.set_markup("<big>Enter the URL</big>" )
-        fLabel.set_markup("<big><u>Format</u></big>" )
-        qLabel.set_markup("<big><u>Quality</u></big>")
+        eLabel.set_markup("<big>Enter the URL</big>"       )
+        fLabel.set_markup("<big><u>Video-Format</u></big>" )
+        qLabel.set_markup("<big><u>Video-Quality</u></big>")
 
         self.vEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Size the widgets
-        self.vEntry  .set_size_request(500, 30)
-        self.vFormat .set_size_request(250, 30)
-        self.vQuality.set_size_request(250, 30)
+        self.vEntry  .set_size_request(500, 32)
+        self.vFormat .set_size_request(245, 32)
+        self.vQuality.set_size_request(245, 32)
         eLabel       .set_size_request(500, 30)
         fLabel       .set_size_request(250, 30)
         qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
         Fix.put(self.vEntry,   0,   50 )
-        Fix.put(self.vFormat,  0,   140)
-        Fix.put(self.vQuality, 250, 140)
+        Fix.put(self.vFormat,  0,   150)
+        Fix.put(self.vQuality, 255, 150)
         Fix.put(eLabel,        0,   10 )
-        Fix.put(fLabel,        0,   105)
-        Fix.put(qLabel,        250, 105)
+        Fix.put(fLabel,        0,   110)
+        Fix.put(qLabel,        250, 110)
 
         return Fix
 
@@ -211,9 +211,9 @@ class GydlMainGui(Gtk.Window):
         self.aEntry    = Gtk.Entry()
         self.aFormat   = Gtk.ComboBoxText()
         self.aQuality  = Gtk.ComboBoxText()
-        eLabel         = Gtk.Label()
-        fLabel         = Gtk.Label()
-        qLabel         = Gtk.Label()
+        eLabel         = Gtk.Label("")
+        fLabel         = Gtk.Label("")
+        qLabel         = Gtk.Label("")
         Fix            = Gtk.Fixed()
 
         # Add entries to comboboxes
@@ -231,34 +231,34 @@ class GydlMainGui(Gtk.Window):
         self.aQuality.set_active(5)
 
         # Add text to widgets
-        eLabel.set_markup("<big>Enter the URL</big>" )
-        fLabel.set_markup("<big><u>Format</u></big>" )
-        qLabel.set_markup("<big><u>Quality</u></big>")
+        eLabel.set_markup("<big>Enter the URL</big>"       )
+        fLabel.set_markup("<big><u>Audio-Format</u></big>" )
+        qLabel.set_markup("<big><u>Audio-Quality</u></big>")
 
         self.aEntry.set_placeholder_text("https://youtube.com/watch...")
 
         # Size the widgets
-        self.aEntry  .set_size_request(500, 30)
-        self.aFormat .set_size_request(250, 30)
-        self.aQuality.set_size_request(250, 30)
+        self.aEntry  .set_size_request(500, 32)
+        self.aFormat .set_size_request(245, 32)
+        self.aQuality.set_size_request(245, 32)
         eLabel       .set_size_request(500, 30)
         fLabel       .set_size_request(250, 30)
         qLabel       .set_size_request(250, 30)
 
         # Add the widgets to the interface
         Fix.put(self.aEntry,   0,   50 )
-        Fix.put(self.aFormat,  0,   140)
-        Fix.put(self.aQuality, 250, 140)
+        Fix.put(self.aFormat,  0,   150)
+        Fix.put(self.aQuality, 255, 150)
         Fix.put(eLabel,        0,   10 )
-        Fix.put(fLabel,        0,   105)
-        Fix.put(qLabel,        250, 105)
+        Fix.put(fLabel,        0,   110)
+        Fix.put(qLabel,        250, 110)
 
         return Fix
 
     def getHeaderBar(self, Switch, Stack):
 
         # Create download button
-        bDownload = Gtk.Button(label=(" Download "))
+        bDownload = Gtk.Button(label=("Download "))
         bDownload.connect("clicked", self.prepareDownload, Stack)
         bDownload.set_always_show_image(True)
         bDownload.get_style_context().add_class("download")
@@ -310,7 +310,7 @@ class GydlMainGui(Gtk.Window):
 
     def __init__(self):
 
-        # Declare main variables
+        # Declare essential variables
         Switch = Gtk.StackSwitcher()
         Stack  = Gtk.Stack()
 
@@ -323,11 +323,11 @@ class GydlMainGui(Gtk.Window):
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
 
-        Stack.add_titled(self.getAudioArea() , "A", "Audio" )
-        Stack.add_titled(self.getVideoArea() , "V", "Video" )
+        Stack.add_titled(self.getAudioArea(), "A", "Audio")
+        Stack.add_titled(self.getVideoArea(), "V", "Video")
         Switch.set_stack(Stack)
-        self.add(Stack)
         self.setStyle()
+        self.add(Stack)
 
 
 
