@@ -4,8 +4,8 @@
 
 __author__     = "Jannik Hauptvogel"
 __maintainer__ = "Jannik Hauptvogel"
-__twitter__    = "https://twitter.com/TheJannikHa"
 __email__      = "JannikHv@gmail.com"
+__twitter__    = "https://twitter.com/TheJannikHa"
 __git__        = "https://github.com/JannikHv/gydl"
 __credits__    = "rg3"
 __license__    = "GPLv2"
@@ -82,7 +82,8 @@ class GydlMainGui(Gtk.Window):
                        + Type
                        + " has been downloaded successfully.\n"
                        + "The file has been stored in "
-                       + getenv("HOME") + "/ .\n"
+                       + getenv("HOME")
+                       + "/ .\n"
                        + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
@@ -154,20 +155,20 @@ class GydlMainGui(Gtk.Window):
                        + "Please press on \"Done\" to exit this program.")
 
             GydlMessageGui(Title, Message, 
-                           Gtk.Image.new_from_icon_name
-                           ("network-error-symbolic",
-                            Gtk.IconSize.BUTTON))
+                           Gtk.Image.new_from_icon_name(
+                           "network-error-symbolic",
+                           Gtk.IconSize.BUTTON))
 
     def getVideoArea(self):
 
         # Create basic widgets
-        self.vEntry    = Gtk.Entry()
-        self.vFormat   = Gtk.ComboBoxText()
-        self.vQuality  = Gtk.ComboBoxText()
-        eLabel         = Gtk.Label("")
-        fLabel         = Gtk.Label("")
-        qLabel         = Gtk.Label("")
-        Fix            = Gtk.Fixed()
+        self.vEntry   = Gtk.Entry()
+        self.vFormat  = Gtk.ComboBoxText()
+        self.vQuality = Gtk.ComboBoxText()
+        eLabel        = Gtk.Label("")
+        fLabel        = Gtk.Label("")
+        qLabel        = Gtk.Label("")
+        Fix           = Gtk.Fixed()
 
         # Add entries to comboboxes
         for i in ["3gp", "flv", "mp4", "webm"]:
@@ -208,13 +209,13 @@ class GydlMainGui(Gtk.Window):
     def getAudioArea(self):
 
         # Create basic widgets
-        self.aEntry    = Gtk.Entry()
-        self.aFormat   = Gtk.ComboBoxText()
-        self.aQuality  = Gtk.ComboBoxText()
-        eLabel         = Gtk.Label("")
-        fLabel         = Gtk.Label("")
-        qLabel         = Gtk.Label("")
-        Fix            = Gtk.Fixed()
+        self.aEntry   = Gtk.Entry()
+        self.aFormat  = Gtk.ComboBoxText()
+        self.aQuality = Gtk.ComboBoxText()
+        eLabel        = Gtk.Label("")
+        fLabel        = Gtk.Label("")
+        qLabel        = Gtk.Label("")
+        Fix           = Gtk.Fixed()
 
         # Add entries to comboboxes
         for i in ["aac", "m4a", "mp3", "ogg", "wav"]:
@@ -258,7 +259,7 @@ class GydlMainGui(Gtk.Window):
     def getHeaderBar(self, Switch, Stack):
 
         # Create download button
-        bDownload = Gtk.Button(label=("Download "))
+        bDownload = Gtk.Button(label="Download ")
         bDownload.connect("clicked", self.prepareDownload, Stack)
         bDownload.set_always_show_image(True)
         bDownload.get_style_context().add_class("download")
@@ -303,7 +304,6 @@ class GydlMainGui(Gtk.Window):
         # Setup the CssProvider
         cssProv = Gtk.CssProvider()
         cssProv.load_from_data(bytes(GydlStyle.encode()))
-
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
                                                  cssProv,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
