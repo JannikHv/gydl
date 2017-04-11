@@ -168,7 +168,7 @@ class GydlMainGui(Gtk.Window):
         eLabel        = Gtk.Label("")
         fLabel        = Gtk.Label("")
         qLabel        = Gtk.Label("")
-        Fix           = Gtk.Fixed()
+        Grid          = Gtk.Grid()
 
         # Add entries to comboboxes
         for i in ["3gp", "flv", "mp4", "webm"]:
@@ -188,23 +188,24 @@ class GydlMainGui(Gtk.Window):
 
         self.vEntry.set_placeholder_text("https://youtube.com/watch...")
 
-        # Size the widgets
-        self.vEntry  .set_size_request(500, 32)
-        self.vFormat .set_size_request(245, 32)
-        self.vQuality.set_size_request(245, 32)
-        eLabel       .set_size_request(500, 30)
-        fLabel       .set_size_request(250, 30)
-        qLabel       .set_size_request(250, 30)
+        # Tweak the grid
+        Grid.set_row_spacing(20)
+        Grid.set_column_homogeneous(True)
 
-        # Add the widgets to the interface
-        Fix.put(self.vEntry,   0,   50 )
-        Fix.put(self.vFormat,  0,   150)
-        Fix.put(self.vQuality, 255, 150)
-        Fix.put(eLabel,        0,   10 )
-        Fix.put(fLabel,        0,   110)
-        Fix.put(qLabel,        250, 110)
+        # Add the widgets to the grid
+        Grid.attach(eLabel,       0, 0, 2, 1)
+        Grid.attach(self.vEntry,  0, 1, 2, 1)
+        Grid.attach(fLabel,       0, 2, 1, 1)
+        Grid.attach_next_to(qLabel,
+                            fLabel,
+                            Gtk.PositionType.RIGHT, 1, 1)
 
-        return Fix
+        Grid.attach(self.vFormat, 0, 3, 1, 1)
+        Grid.attach_next_to(self.vQuality,
+                            self.vFormat,
+                            Gtk.PositionType.RIGHT, 1, 1)
+
+        return Grid
 
     def getAudioArea(self):
 
@@ -213,9 +214,9 @@ class GydlMainGui(Gtk.Window):
         self.aFormat  = Gtk.ComboBoxText()
         self.aQuality = Gtk.ComboBoxText()
         eLabel        = Gtk.Label("")
-        fLabel        = Gtk.Label("")
-        qLabel        = Gtk.Label("")
-        Fix           = Gtk.Fixed()
+        fLabel        = Gtk.Label("This Format")
+        qLabel        = Gtk.Label("This Quality")
+        Grid          = Gtk.Grid()
 
         # Add entries to comboboxes
         for i in ["aac", "m4a", "mp3", "ogg", "wav"]:
@@ -238,23 +239,24 @@ class GydlMainGui(Gtk.Window):
 
         self.aEntry.set_placeholder_text("https://youtube.com/watch...")
 
-        # Size the widgets
-        self.aEntry  .set_size_request(500, 32)
-        self.aFormat .set_size_request(245, 32)
-        self.aQuality.set_size_request(245, 32)
-        eLabel       .set_size_request(500, 30)
-        fLabel       .set_size_request(250, 30)
-        qLabel       .set_size_request(250, 30)
+        # Tweak the grid
+        Grid.set_row_spacing(20)
+        Grid.set_column_homogeneous(True)
 
-        # Add the widgets to the interface
-        Fix.put(self.aEntry,   0,   50 )
-        Fix.put(self.aFormat,  0,   150)
-        Fix.put(self.aQuality, 255, 150)
-        Fix.put(eLabel,        0,   10 )
-        Fix.put(fLabel,        0,   110)
-        Fix.put(qLabel,        250, 110)
+        # Add the widgets to the grid
+        Grid.attach(eLabel,       0, 0, 2, 1)
+        Grid.attach(self.aEntry,  0, 1, 2, 1)
+        Grid.attach(fLabel,       0, 2, 1, 1)
+        Grid.attach_next_to(qLabel,
+                            fLabel,
+                            Gtk.PositionType.RIGHT, 1, 1)
 
-        return Fix
+        Grid.attach(self.aFormat, 0, 3, 1, 1)
+        Grid.attach_next_to(self.aQuality,
+                            self.aFormat,
+                            Gtk.PositionType.RIGHT, 1, 1)
+
+        return Grid
 
     def getHeaderBar(self, Switch, Stack):
 
@@ -316,9 +318,9 @@ class GydlMainGui(Gtk.Window):
 
         # Configure the window
         Gtk.Window.__init__  (self)
-        self.set_default_size(500, 250)
-        self.set_resizable   (False)
-        self.set_border_width(10)
+        self.set_default_size(525, 230)
+        self.set_resizable   (True)
+        self.set_border_width(15)
         self.set_icon_name   ("Youtube-youtube.com")
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
