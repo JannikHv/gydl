@@ -15,6 +15,7 @@ __license__    = "GPLv2"
 
 import gi
 gi.require_version('Gtk', '3.0')
+gi.require_version('Gdk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
@@ -34,7 +35,7 @@ class GydlMessageGui(Gtk.Window):
 
     def getHeaderBar(self, Title, Image):
 
-        # Configure of the headerbar
+        # Configure the headerbar
         hBar  = Gtk.HeaderBar()
         Label = Gtk.Label(Title)
         Btn   = Gtk.Button(label="Done")
@@ -188,7 +189,7 @@ class GydlMainGui(Gtk.Window):
         self.vQuality.set_active(3)
 
         # Add text to widgets
-        eLabel.set_markup("<big>Enter the URL</big>"       )
+        eLabel.set_markup("\n<big>Enter the URL</big>"     )
         fLabel.set_markup("<big><u>Video-Format</u></big>" )
         qLabel.set_markup("<big><u>Video-Quality</u></big>")
 
@@ -241,7 +242,7 @@ class GydlMainGui(Gtk.Window):
         self.aQuality.set_active(5)
 
         # Add text to widgets
-        eLabel.set_markup("<big>Enter the URL</big>"       )
+        eLabel.set_markup("\n<big>Enter the URL</big>"     )
         fLabel.set_markup("<big><u>Audio-Format</u></big>" )
         qLabel.set_markup("<big><u>Audio-Quality</u></big>")
 
@@ -328,9 +329,9 @@ class GydlMainGui(Gtk.Window):
 
         # Configure the window
         Gtk.Window.__init__  (self)
-        self.set_default_size(525, 230)
+        self.set_default_size(530, 250)
         self.set_resizable   (True)
-        self.set_border_width(15)
+        self.set_border_width(10)
         self.set_icon_name   ("Youtube-youtube.com")
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
