@@ -7,6 +7,7 @@ __maintainer__ = "Jannik Hauptvogel"
 __email__      = "JannikHv@gmail.com"
 __twitter__    = "https://twitter.com/TheJannikHa"
 __git__        = "https://github.com/JannikHv/gydl"
+__aur__        = "https://aur.archlinux.org/packages/gydl-git/"
 __credits__    = "rg3"
 __license__    = "GPLv2"
 
@@ -86,9 +87,11 @@ class GydlMainGui(Gtk.Window):
                        + "/ .\n"
                        + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
-                                           "object-select-symbolic",
-                                           Gtk.IconSize.BUTTON))
+            Image   = Gtk.Image.new_from_icon_name(
+                      "object-select-symbolic",
+                      Gtk.IconSize.BUTTON)
+
+            GydlMessageGui(Title, Message, Image)
 
         else:
             Title   = ("Download Unsuccessful")
@@ -97,11 +100,13 @@ class GydlMainGui(Gtk.Window):
                        + " has not been downloaded.\n"
                        + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(Title, Message, Gtk.Image.new_from_icon_name(
-                                           "action-unavailable-symbolic",
-                                           Gtk.IconSize.BUTTON))
+            Image   = Gtk.Image.new_from_icon_name(
+                      "action-unavailable-symbolic",
+                      Gtk.IconSize.BUTTON)
 
-    def downloadVideo(self):
+            GydlMessageGui(Title, Message, Image)
+
+    def prepareVideo(self):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
@@ -113,7 +118,7 @@ class GydlMainGui(Gtk.Window):
 
         self.downloadMain(Cmd, "video")
 
-    def downloadAudio(self):
+    def prepareAudio(self):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
@@ -142,10 +147,10 @@ class GydlMainGui(Gtk.Window):
             Gdk.flush()
 
             # Procceed to either Video or Audio download
-            if Stack.get_visible_child_name() == "A":
-                self.downloadAudio()
+            if Stack.get_visible_child_name() == "V":
+                self.prepareVideo()
             else:
-                self.downloadVideo()
+                self.prepareAudio()
 
         except Exception:
 
@@ -154,10 +159,11 @@ class GydlMainGui(Gtk.Window):
             Message = ("No internet connection has been established.\n"
                        + "Please press on \"Done\" to exit this program.")
 
-            GydlMessageGui(Title, Message, 
-                           Gtk.Image.new_from_icon_name(
-                           "network-error-symbolic",
-                           Gtk.IconSize.BUTTON))
+            Image   = Gtk.Image.new_from_icon_name(
+                      "network-error-symbolic",
+                      Gtk.IconSize.BUTTON)
+
+            GydlMessageGui(Title, Message, Image)
 
     def getVideoArea(self):
 
@@ -193,17 +199,19 @@ class GydlMainGui(Gtk.Window):
         Grid.set_column_homogeneous(True)
 
         # Add the widgets to the grid
-        Grid.attach(eLabel,       0, 0, 2, 1)
-        Grid.attach(self.vEntry,  0, 1, 2, 1)
-        Grid.attach(fLabel,       0, 2, 1, 1)
+        Grid.attach(eLabel,      0, 0, 2, 1)
+        Grid.attach(self.vEntry, 0, 1, 2, 1)
+        Grid.attach(fLabel,      0, 2, 1, 1)
         Grid.attach_next_to(qLabel,
                             fLabel,
-                            Gtk.PositionType.RIGHT, 1, 1)
+                            Gtk.PositionType.RIGHT,
+                            1, 1)
 
         Grid.attach(self.vFormat, 0, 3, 1, 1)
         Grid.attach_next_to(self.vQuality,
                             self.vFormat,
-                            Gtk.PositionType.RIGHT, 1, 1)
+                            Gtk.PositionType.RIGHT,
+                            1, 1)
 
         return Grid
 
@@ -214,8 +222,8 @@ class GydlMainGui(Gtk.Window):
         self.aFormat  = Gtk.ComboBoxText()
         self.aQuality = Gtk.ComboBoxText()
         eLabel        = Gtk.Label("")
-        fLabel        = Gtk.Label("This Format")
-        qLabel        = Gtk.Label("This Quality")
+        fLabel        = Gtk.Label("")
+        qLabel        = Gtk.Label("")
         Grid          = Gtk.Grid()
 
         # Add entries to comboboxes
@@ -244,17 +252,19 @@ class GydlMainGui(Gtk.Window):
         Grid.set_column_homogeneous(True)
 
         # Add the widgets to the grid
-        Grid.attach(eLabel,       0, 0, 2, 1)
-        Grid.attach(self.aEntry,  0, 1, 2, 1)
-        Grid.attach(fLabel,       0, 2, 1, 1)
+        Grid.attach(eLabel,      0, 0, 2, 1)
+        Grid.attach(self.aEntry, 0, 1, 2, 1)
+        Grid.attach(fLabel,      0, 2, 1, 1)
         Grid.attach_next_to(qLabel,
                             fLabel,
-                            Gtk.PositionType.RIGHT, 1, 1)
+                            Gtk.PositionType.RIGHT,
+                            1, 1)
 
         Grid.attach(self.aFormat, 0, 3, 1, 1)
         Grid.attach_next_to(self.aQuality,
                             self.aFormat,
-                            Gtk.PositionType.RIGHT, 1, 1)
+                            Gtk.PositionType.RIGHT,
+                            1, 1)
 
         return Grid
 
@@ -291,7 +301,7 @@ class GydlMainGui(Gtk.Window):
     def setStyle(self):
 
         # Prepare the Css data
-        GydlStyle = """
+        GydlStyle = ("""
         button.download {
             background: #5baad2;
             color:      #ffffff;
@@ -301,7 +311,7 @@ class GydlMainGui(Gtk.Window):
             background: #7ebedd;
             color:      #ffffff;
         }
-        """
+        """)
 
         # Setup the CssProvider
         cssProv = Gtk.CssProvider()
