@@ -6,6 +6,6 @@ Encoding=UTF-8
 Exec=/usr/bin/gydl
 GenericName=Youtube Downloader GUI
 Icon=Youtube-youtube.com
-Name=Gydl
+Name=Graphical Youtube-dl
 Terminal=false
 Type=Application
