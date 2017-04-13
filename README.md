@@ -33,21 +33,21 @@ When using Gydl, you have the option to download your Youtube Video as a **Video
 Each of these options have a text entry, as well as 2 comboboxes managing quality and the format.
 
 
-![alt tag](http://imgur.com/E2PGLIp)
+![alt tag](http://i.imgur.com/IZN2fpR.png)
 
 When clicking on **Download** there are 3 scenarious you can face:
 
 * Download Finished - When your download has finished successfully.
 
-![alt tag](http://imgur.com/E2PGLIp)
+![alt tag](http://i.imgur.com/AfOOVgF.png)
 
 * Download Unsuccessful - When a bad URL was entered or similar errors occured.
 
-![alt tag](http://imgur.com/E2PGLIp)
+![alt tag](http://i.imgur.com/o8lVPas.png)
 
 * Connection Error - When no internet connection could be established.
 
-![alt tag](http://imgur.com/E2PGLIp)
+![alt tag](http://i.imgur.com/ayGKlFd.png)
 
 These dialogs will be presented to you as a little dialog'ish windows.
 
