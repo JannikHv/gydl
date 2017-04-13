@@ -299,7 +299,7 @@ class GydlMainGui(Gtk.Window):
 
         return hBar
 
-    def setStyle(self):
+    def setStyle(self, Stack):
 
         # Prepare the Css data
         GydlStyle = ("""
@@ -321,6 +321,10 @@ class GydlMainGui(Gtk.Window):
                                                  cssProv,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
+        # Configure the stack transition
+        Stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
+        Stack.set_transition_duration(400)
+
     def __init__(self):
 
         # Declare essential variables
@@ -335,7 +339,7 @@ class GydlMainGui(Gtk.Window):
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
         self.set_icon_name   ("applications-multimedia")
-        self.setStyle        ()
+        self.setStyle        (Stack)
 
         Stack.add_titled(self.getAudioArea(), "A", "Audio")
         Stack.add_titled(self.getVideoArea(), "V", "Video")
@@ -346,6 +350,6 @@ class GydlMainGui(Gtk.Window):
 
 if __name__ == "__main__":
     Win = GydlMainGui()
-    Win.connect("delete-event", Gtk.main_quit)
+    Win.connect("delete-event", Gtk.main_quit, None)
     Win.show_all()
     Gtk.main()
