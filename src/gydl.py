@@ -62,10 +62,9 @@ class GydlMessageGui(Gtk.Window):
         self.set_default_size(375, 100)
         self.set_resizable   (False)
         self.set_border_width(10)
-        self.set_icon_name   ("Youtube-youtube.com")
         self.set_titlebar    (self.getHeaderBar(Title, Image))
         self.set_position    (Gtk.WindowPosition.CENTER)
-        GydlMainGui().setStyle(self)
+        self.set_icon_name   ("applications-multimedia")
 
         self.add(self.getLayout(Message))
         self.show_all()
@@ -300,7 +299,7 @@ class GydlMainGui(Gtk.Window):
 
         return hBar
 
-    def setStyle(self, Window):
+    def setStyle(self):
 
         # Prepare the Css data
         GydlStyle = ("""
@@ -322,13 +321,6 @@ class GydlMainGui(Gtk.Window):
                                                  cssProv,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-        # Set the window icon and check if the youtube icon exists
-        if Gtk.IconTheme.get_default().has_icon("Youtube-youtube.com"):
-            Window.set_icon_name("Youtube-youtube.com")
-        else:
-            # Use multimedia-player icon as fallback icon
-            Window.set_icon_name("multimedia-player")
-
     def __init__(self):
 
         # Declare essential variables
@@ -342,7 +334,8 @@ class GydlMainGui(Gtk.Window):
         self.set_border_width(10)
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
-        self.setStyle        (self)
+        self.set_icon_name   ("applications-multimedia")
+        self.setStyle        ()
 
         Stack.add_titled(self.getAudioArea(), "A", "Audio")
         Stack.add_titled(self.getVideoArea(), "V", "Video")
