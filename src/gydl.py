@@ -19,13 +19,16 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
+from gi.repository import GLib
 from os            import getenv
 from subprocess    import call as subcall
+
 
 
 def GydlQuit(Widget, Data):
     Gtk.main_quit()
     quit()
+
 
 
 class GydlMessageGui(Gtk.Window):
@@ -113,7 +116,7 @@ class GydlMainGui(Gtk.Window):
             GydlMessageGui(Title, Message, Image)
 
         else:
-            Title   = ("Download Unsuccessful")
+            Title   = ("Download Unsuccessful" + str(Status))
             Message = ("Your "
                        + Type
                        + " has not been downloaded.\n"
@@ -172,7 +175,7 @@ class GydlMainGui(Gtk.Window):
             else:
                 self.prepareAudio()
 
-        except Exception:
+        except GLib.Error:
 
             # Show Connection error dialog
             Title   = ("Connection Error")
