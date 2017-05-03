@@ -1,7 +1,3 @@
-# Problem
-By the last update of Python, problems with subprocesses have occured leading to non-functionality of this program.
-I will try to find a solution ASAP, going to keep you updated.
-
 # About
 Gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing youtube-dl program.
 
