@@ -116,7 +116,7 @@ class GydlMainGui(Gtk.Window):
             GydlMessageGui(Title, Message, Image)
 
         else:
-            Title   = ("Download Unsuccessful" + str(Status))
+            Title   = ("Download Unsuccessful")
             Message = ("Your "
                        + Type
                        + " has not been downloaded.\n"
