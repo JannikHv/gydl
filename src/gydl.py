@@ -48,16 +48,15 @@ class GydlMessageGui(Gtk.Window):
     def getHeaderBar(self, Title, Image):
 
         # Configure the headerbar
-        hBar   = Gtk.HeaderBar()
-        Label  = Gtk.Label(Title)
-        B_done = Gtk.Button(label="Done")
-        B_done.get_style_context().add_class("download")
+        hBar  = Gtk.HeaderBar()
+        Label = Gtk.Label(Title)
+        Btn   = Gtk.Button(label="Done")
+        Btn.get_style_context().add_class("suggested-action")
 
         B_exit = Gtk.Button(label=" Exit ")
         B_exit.set_image(Image)
         B_exit.set_always_show_image(True)
         B_exit.set_image_position(Gtk.PositionType.LEFT)
-
 
         # If a connection error occurs solely close the dialog
         if Title[0] == "C":
@@ -298,7 +297,7 @@ class GydlMainGui(Gtk.Window):
         bDownload = Gtk.Button(label="Download ")
         bDownload.connect("clicked", self.prepareDownload, Stack)
         bDownload.set_always_show_image(True)
-        bDownload.get_style_context().add_class("download")
+        bDownload.get_style_context().add_class("suggested-action")
         bDownload.set_image_position(Gtk.PositionType.RIGHT)
         bDownload.set_image(Gtk.Image.new_from_icon_name(
                             "folder-download-symbolic",
@@ -323,26 +322,6 @@ class GydlMainGui(Gtk.Window):
         return hBar
 
     def setStyle(self, Stack):
-
-        # Prepare the Css data
-        GydlStyle = ("""
-        button.download {
-            background: #5baad2;
-            color:      #ffffff;
-        }
-
-        button.download:hover {
-            background: #7ebedd;
-            color:      #ffffff;
-        }
-        """)
-
-        # Setup the CssProvider
-        cssProv = Gtk.CssProvider()
-        cssProv.load_from_data(bytes(GydlStyle.encode()))
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-                                                 cssProv,
-                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Configure the stack transition
         Stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
