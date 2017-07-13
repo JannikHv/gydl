@@ -19,12 +19,24 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
+from gi.repository import GLib
 from os            import getenv
 from subprocess    import call as subcall
 
 
 
+def GydlQuit(Widget, Data):
+    Gtk.main_quit()
+    quit()
+
+
+
 class GydlMessageGui(Gtk.Window):
+
+    def returnHome(self, Widget, Data):
+        self.close()
+        execMain()
+
 
     def closeWindow(self, Widget, Data):
         self.close()
@@ -41,17 +53,24 @@ class GydlMessageGui(Gtk.Window):
         Btn   = Gtk.Button(label="Done")
         Btn.get_style_context().add_class("suggested-action")
 
+        B_exit = Gtk.Button(label=" Exit ")
+        B_exit.set_image(Image)
+        B_exit.set_always_show_image(True)
+        B_exit.set_image_position(Gtk.PositionType.LEFT)
+
         # If a connection error occurs solely close the dialog
         if Title[0] == "C":
-            Btn.connect("clicked", self.closeWindow, None)
+            B_done.connect("clicked", self.closeWindow, None)
         else:
-            Btn.connect("clicked", Gtk.main_quit, None)
+            B_done.connect("clicked", self.returnHome, None)
+
+        B_exit.connect("clicked", GydlQuit, None)
 
         # Configure the headerbar
         hBar.set_show_close_button(False)
         hBar.set_custom_title     (Label)
-        hBar.pack_start           (Image)
-        hBar.pack_end             (Btn)
+        hBar.pack_start           (B_exit)
+        hBar.pack_end             (B_done)
 
         return hBar
 
@@ -59,7 +78,7 @@ class GydlMessageGui(Gtk.Window):
 
         # Configure the window
         Gtk.Window.__init__  (self)
-        self.set_default_size(375, 100)
+        self.set_default_size(420, 120)
         self.set_resizable   (False)
         self.set_border_width(10)
         self.set_titlebar    (self.getHeaderBar(Title, Image))
@@ -86,7 +105,8 @@ class GydlMainGui(Gtk.Window):
                        + "The file has been stored in "
                        + getenv("HOME")
                        + "/ .\n"
-                       + "Please press on \"Done\" to exit this program.")
+                       + "Please press on \"Done\" to return to the \n"
+                       + "main application.")
 
             Image   = Gtk.Image.new_from_icon_name(
                       "object-select-symbolic",
@@ -99,7 +119,8 @@ class GydlMainGui(Gtk.Window):
             Message = ("Your "
                        + Type
                        + " has not been downloaded.\n"
-                       + "Please press on \"Done\" to exit this program.")
+                       + "Please press on \"Done\" to return to the \n"
+                       + "main application.")
 
             Image   = Gtk.Image.new_from_icon_name(
                       "action-unavailable-symbolic",
@@ -153,12 +174,13 @@ class GydlMainGui(Gtk.Window):
             else:
                 self.prepareAudio()
 
-        except Exception:
+        except GLib.Error:
 
             # Show Connection error dialog
             Title   = ("Connection Error")
             Message = ("No internet connection has been established.\n"
-                       + "Please press on \"Done\" to exit this program.")
+                       + "Please press on \"Done\" to return to the \n"
+                       + "main application.")
 
             Image   = Gtk.Image.new_from_icon_name(
                       "network-error-symbolic",
@@ -283,7 +305,7 @@ class GydlMainGui(Gtk.Window):
 
         # Create leave button
         bLeave = Gtk.Button(label=" Leave")
-        bLeave.connect("clicked", Gtk.main_quit, None)
+        bLeave.connect("clicked", GydlQuit, None)
         bLeave.set_always_show_image(True)
         bLeave.set_image_position(Gtk.PositionType.LEFT)
         bLeave.set_image(Gtk.Image.new_from_icon_name(
@@ -328,8 +350,11 @@ class GydlMainGui(Gtk.Window):
 
 
 
+def execMain():
+        Win = GydlMainGui()
+        Win.connect("delete-event", Gtk.main_quit, None)
+        Win.show_all()
+        Gtk.main()
+
 if __name__ == "__main__":
-    Win = GydlMainGui()
-    Win.connect("delete-event", Gtk.main_quit, None)
-    Win.show_all()
-    Gtk.main()
+    execMain()
