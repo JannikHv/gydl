@@ -48,10 +48,10 @@ class GydlMessageGui(Gtk.Window):
     def getHeaderBar(self, Title, Image):
 
         # Configure the headerbar
-        hBar  = Gtk.HeaderBar()
-        Label = Gtk.Label(Title)
-        Btn   = Gtk.Button(label="Done")
-        Btn.get_style_context().add_class("suggested-action")
+        hBar   = Gtk.HeaderBar()
+        Label  = Gtk.Label(Title)
+        B_done = Gtk.Button(label="Done")
+        B_done.get_style_context().add_class("suggested-action")
 
         B_exit = Gtk.Button(label=" Exit ")
         B_exit.set_image(Image)
