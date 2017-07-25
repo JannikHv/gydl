@@ -20,7 +20,6 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Gio
 from gi.repository import GLib
-from os            import getenv
 from subprocess    import call as subcall
 
 
@@ -92,7 +91,7 @@ class GydlMessageGui(Gtk.Window):
 
 class GydlMainGui(Gtk.Window):
 
-    def downloadMain(self, Cmd, Type):
+    def downloadMain(self, Cmd, Type, DownloadDir):
 
         # Start the main download calling youtube-dl
         Status = subcall(Cmd, shell=True)
@@ -103,7 +102,7 @@ class GydlMainGui(Gtk.Window):
                        + Type
                        + " has been downloaded successfully.\n"
                        + "The file has been stored in "
-                       + getenv("HOME")
+                       + DownloadDir
                        + "/ .\n"
                        + "Please press on \"Done\" to return to the \n"
                        + "main application.")
@@ -128,23 +127,27 @@ class GydlMainGui(Gtk.Window):
 
             GydlMessageGui(Title, Message, Image)
 
-    def prepareVideo(self):
+    def prepareVideo(self, DownloadDir):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
-               + "-o \"~/%(title)s.%(ext)s\" \"UUU\"")
+               + "-o \""
+               + DownloadDir
+               + "/%(title)s.%(ext)s\" \"UUU\"")
 
         Cmd = Cmd.replace("FFF", self.vFormat.get_active_text())
         Cmd = Cmd.replace("QQQ", self.vQuality.get_active_text().replace("p", ""))
         Cmd = Cmd.replace("UUU", self.vEntry.get_text())
 
-        self.downloadMain(Cmd, "video")
+        self.downloadMain(Cmd, "video", DownloadDir)
 
-    def prepareAudio(self):
+    def prepareAudio(self, DownloadDir):
 
         # Prepare the command
         Cmd = ("youtube-dl --no-playlist -x --audio-format FFF "
-               + "--audio-quality QQQ -o \"~/%(title)s.%(ext)s\" \"UUU\"")
+               + "--audio-quality QQQ -o \""
+               + DownloadDir
+               + "/%(title)s.%(ext)s\" \"UUU\"")
 
         if self.aFormat.get_active_text() == "ogg":
             Cmd = Cmd.replace("FFF", "vorbis")
@@ -154,7 +157,7 @@ class GydlMainGui(Gtk.Window):
         Cmd = Cmd.replace("QQQ", self.aQuality.get_active_text()[0])
         Cmd = Cmd.replace("UUU", self.aEntry.get_text())
 
-        self.downloadMain(Cmd, "audio")
+        self.downloadMain(Cmd, "audio", DownloadDir)
 
     def prepareDownload(self, widget, Stack):
 
@@ -164,15 +167,18 @@ class GydlMainGui(Gtk.Window):
                                          Gio.NetworkAddress.new("google.com", 0),
                                          Gio.Cancellable.new())
 
+            # Set download directory
+            DownloadDir = GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
+
             # Hide the main window
             self.hide()
             Gdk.flush()
 
             # Procceed to either Video or Audio download
             if Stack.get_visible_child_name() == "V":
-                self.prepareVideo()
+                self.prepareVideo(DownloadDir)
             else:
-                self.prepareAudio()
+                self.prepareAudio(DownloadDir)
 
         except GLib.Error:
 
