@@ -7,6 +7,12 @@ Big **thank you** to the developer(s) of youtube-dl! Check out their project:
 
 https://github.com/rg3/youtube-dl
 
+# News!
+
+Gydl is currently receiving a new design along with a rewrite to C. It will keep the dialog'ish style.
+
+Thanks for your patience.
+
 # Installation and dependencies
 
 Gydl is written in Python3 and uses the GTK+3 toolkit.
