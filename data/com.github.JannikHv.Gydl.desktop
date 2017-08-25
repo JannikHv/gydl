@@ -3,9 +3,9 @@
 Categories=AudioVideo;
 Comment=Graphical interface for youtube-dl
 Encoding=UTF-8
-Exec=/usr/bin/gydl
+Exec=gydl
 GenericName=Youtube Downloader GUI
-Icon=applications-multimedia
-Name=Graphical Youtube-dl
+Icon=gydl
+Name=Gydl
 Terminal=false
 Type=Application
