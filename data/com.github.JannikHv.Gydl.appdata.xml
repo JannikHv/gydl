@@ -41,6 +41,7 @@
       Ett stort tack till till utvecklarna.
     </p>
   </description>
+  <launchable>com.github.JannikHv.Gydl.desktop</launchable>
   <url type="homepage">https://github.com/JannikHv/gydl</url>
   <url type="bugtracker">https://github.com/JannikHv/gydl/issues</url>
   <url type="help">https://github.com/JannikHv/gydl/blob/master/README.md</url>
@@ -49,5 +50,5 @@
       <image>https://raw.githubusercontent.com/JannikHv/gydl/master/images/screenshot-01.png</image>
     </screenshot>
   </screenshots>
-  <update_contact>asavartzeth_AT_gmail.com</update_contact>
+  <update_contact>contact_AT_hembas.se</update_contact>
 </component>
