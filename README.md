@@ -12,7 +12,7 @@ https://github.com/rg3/youtube-dl
 
 # News!
 
-Gydl is currently receiving a new design along with a rewrite to C. It will keep the dialog'ish style.
+Gydl is receiving a rewrite to C. When it's stable, the work on a new design starting.
 
 Thanks for your patience.
 
