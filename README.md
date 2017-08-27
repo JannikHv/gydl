@@ -12,7 +12,7 @@ https://github.com/rg3/youtube-dl
 
 # News!
 
-Gydl is receiving a rewrite to C. When it's stable, the work on a new design starting.
+Gydl is receiving a rewrite to C. When it's stable, the work on a new design is starting.
 
 Thanks for your patience.
 
