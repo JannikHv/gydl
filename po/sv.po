@@ -1,0 +1,71 @@
+# Swedish localization for Gydl.
+# Copyright (C) 2017
+# This file is distributed under the same license as the Gydl package.
+# Patrik Nilsson <translation_AT_hembas.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Gydl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-13 12:21+0200\n"
+"PO-Revision-Date: 2017-09-13 12:21+0200\n"
+"Last-Translator: Patrik Nilsson <translation_AT_hembas.se>\n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/com.github.JannikHv.Gydl.desktop.in:4
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:8
+msgid "Download content from sites like YouTube"
+msgstr "Hämta innehåll från webbplatser som YouTube"
+
+#: data/com.github.JannikHv.Gydl.desktop.in:7
+msgid "YouTube Downloader"
+msgstr "YouTube nedladdnings-program"
+
+#. Translators: This is an icon name, don't translate!
+#: data/com.github.JannikHv.Gydl.desktop.in:9
+msgid "gydl"
+msgstr "gydl"
+
+#: data/com.github.JannikHv.Gydl.desktop.in:10
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:7
+msgid "Gydl"
+msgstr "Gydl"
+
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:9
+msgid "Jannik Hauptvogel"
+msgstr "Jannik Hauptvogel"
+
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:11
+msgid ""
+"Gydl (Graphical youtube-dl) is a tool that enables downloading of content "
+"from YouTube and many other sites. It provides a minimal interface based on "
+"dialogues, making it quick and easy to download multimedia content."
+msgstr ""
+"Gydl (grafisk youtube-dl) är ett verktyg som möjliggör nedladdning av "
+"innehåll från YouTube samt många andra webbplatser. Det förser ett simpelt "
+"gränssnitt baserat på dialoger, vilket gör det snabbt och enkelt att ladda "
+"ner multimedia innehåll."
+
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:16
+msgid ""
+"Because user needs vary, Gydl supports both audio and video downloads. If a "
+"selected format is not available at the source, Gydl will attempt to convert "
+"it."
+msgstr ""
+"Eftersom användarbehov varierar, stödjer Gydl nedladdningar av både ljud och "
+"video. Om ett valt format inte är tillgängligt hos källan, kommer Gydl att "
+"försöka konvertera det."
+
+#: data/com.github.JannikHv.Gydl.appdata.xml.in:20
+msgid ""
+"Gydl is based upon the popular youtube-dl program, which can be found on "
+"GitHub. A big thank you to the developer(s)."
+msgstr ""
+"Gydl är baserat på det populära youtube-dl programmet, som ni kan hitta på "
+"GitHub. Ett stort tack till till utvecklarna."
