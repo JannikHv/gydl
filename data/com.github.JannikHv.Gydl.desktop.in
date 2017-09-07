@@ -5,6 +5,7 @@ Comment=Graphical interface for youtube-dl
 Encoding=UTF-8
 Exec=gydl
 GenericName=Youtube Downloader GUI
+# Translators: This is an icon name, don't translate!
 Icon=gydl
 Name=Gydl
 Terminal=false

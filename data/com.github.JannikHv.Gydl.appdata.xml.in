@@ -5,9 +5,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Gydl</name>
-  <name xml:lang="sv">Gydl</name>
   <summary>Download content from YouTube or other video platforms</summary>
-  <summary xml:lang="sv">Ladda ner innehåll från YouTube samt andra video platformar</summary>
   <developer_name>Jannik Hauptvogel</developer_name>
   <description>
     <p>
@@ -24,23 +22,6 @@
       A big thank you to the developer(s).
     </p>
   </description>
-  <description xml:lang="sv">
-    <p>
-      Gydl (grafisk youtube-dl) är ett verktyg som tillåter nedladdning av innehåll
-      från YouTube och många andra webbplatser. Det förser ett simpelt gränssnitt
-      baserat på dialoger, vilket gör det snabbt och enkelt att ladda ner
-      multimedia filer.
-    </p>
-    <p>
-      Eftersom en användares behov varierar, stödjer Gydl nedladdningar av både ljud
-      och video. Om ett utvalt format inte är tillgängligt hos källan kommer Gydl att
-      konvertera det.
-    </p>
-    <p>
-      Gydl är baserat på det populära youtube-dl programmet, som ni kan hitta på GitHub.
-      Ett stort tack till till utvecklarna.
-    </p>
-  </description>
   <launchable>com.github.JannikHv.Gydl.desktop</launchable>
   <url type="homepage">https://github.com/JannikHv/gydl</url>
   <url type="bugtracker">https://github.com/JannikHv/gydl/issues</url>
@@ -51,4 +32,5 @@
     </screenshot>
   </screenshots>
   <update_contact>contact_AT_hembas.se</update_contact>
+  <translation type="gettext">Gydl</translation>
 </component>
