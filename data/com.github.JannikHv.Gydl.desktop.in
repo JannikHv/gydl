@@ -3,7 +3,7 @@ Categories=AudioVideo;
 Comment=Download content from sites like YouTube
 Encoding=UTF-8
 Exec=gydl
-GenericName=Youtube Downloader GUI
+GenericName=YouTube Downloader
 # Translators: This is an icon name, don't translate!
 Icon=gydl
 Name=Gydl
