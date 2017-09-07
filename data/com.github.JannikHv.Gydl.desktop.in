@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=AudioVideo;
-Comment=Graphical interface for youtube-dl
+Comment=Download content from sites like YouTube
 Encoding=UTF-8
 Exec=gydl
 GenericName=Youtube Downloader GUI
