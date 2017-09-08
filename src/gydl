@@ -82,7 +82,7 @@ class GydlMessageGui(Gtk.Window):
         self.set_border_width(10)
         self.set_titlebar    (self.getHeaderBar(Title, Image))
         self.set_position    (Gtk.WindowPosition.CENTER)
-        self.set_icon_name   ("applications-multimedia")
+        self.set_icon_name   ("gydl")
 
         self.add(self.getLayout(Message))
         self.show_all()
@@ -346,7 +346,7 @@ class GydlMainGui(Gtk.Window):
         self.set_border_width(10)
         self.set_titlebar    (self.getHeaderBar(Switch, Stack))
         self.set_position    (Gtk.WindowPosition.CENTER)
-        self.set_icon_name   ("applications-multimedia")
+        self.set_icon_name   ("gydl")
         self.setStyle        (Stack)
 
         Stack.add_titled(self.getAudioArea(), "A", "Audio")
