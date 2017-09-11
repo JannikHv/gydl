@@ -92,7 +92,7 @@ static void gydl_dialog_init(GydlDialog *dialog,
                                     GYDL_DIALOG_SIZE_Y);
         gtk_window_set_titlebar(GTK_WINDOW(dialog->self), dialog->hbar);
         gtk_window_set_position(GTK_WINDOW(dialog->self), GTK_WIN_POS_CENTER);
-        gtk_container_set_border_width(GTK_CONTAINER(dialog->self), 0);
+        gtk_window_set_icon_name(GTK_WINDOW(dialog->self), "gydl");
         gtk_container_add(GTK_CONTAINER(dialog->self), dialog->grid);
         g_signal_connect(dialog->self,
                          "destroy",

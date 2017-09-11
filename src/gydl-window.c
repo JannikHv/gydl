@@ -95,6 +95,7 @@ static void gydl_window_init(GydlWindow *win)
                                     GYDL_WIN_SIZE_Y);
         gtk_window_set_titlebar(GTK_WINDOW(win->self), win->hbar);
         gtk_window_set_position(GTK_WINDOW(win->self), GTK_WIN_POS_CENTER);
+        gtk_window_set_icon_name(GTK_WINDOW(win->self), "gydl");
         gtk_container_add(GTK_CONTAINER(win->self), win->stack);
         g_signal_connect(win->self,
                          "delete-event",
