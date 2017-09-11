@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Jannik Hauptvogel -->
+<component type="desktop-application">
+  <id>com.github.JannikHv.Gydl.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <name>Gydl</name>
+  <name xml:lang="sv">Gydl</name>
+  <summary>Download content from YouTube or other video platforms</summary>
+  <summary xml:lang="sv">Ladda ner innehåll från YouTube samt andra video platformar</summary>
+  <developer_name>Jannik Hauptvogel</developer_name>
+  <description>
+    <p>
+      Gydl (Graphical youtube-dl) is a tool that allows downloading of content from
+      YouTube and many other sites. It provides a simple interface based on dialogues
+      that makes it quick and easy to download multimedia content.
+    </p>
+    <p>
+      Because a user's needs vary, Gydl supports both audio and video downloads. If a
+      selected format is not available at the source, Gydl will transcode it.
+    </p>
+    <p>
+      Gydl is based upon the popular youtube-dl program, which can be found on GitHub.
+      A big thank you to the developer(s).
+    </p>
+  </description>
+  <description xml:lang="sv">
+    <p>
+      Gydl (grafisk youtube-dl) är ett verktyg som tillåter nedladdning av innehåll
+      från YouTube och många andra webbplatser. Det förser ett simpelt gränssnitt
+      baserat på dialoger, vilket gör det snabbt och enkelt att ladda ner
+      multimedia filer.
+    </p>
+    <p>
+      Eftersom en användares behov varierar, stödjer Gydl nedladdningar av både ljud
+      och video. Om ett utvalt format inte är tillgängligt hos källan kommer Gydl att
+      konvertera det.
+    </p>
+    <p>
+      Gydl är baserat på det populära youtube-dl programmet, som ni kan hitta på GitHub.
+      Ett stort tack till till utvecklarna.
+    </p>
+  </description>
+  <launchable>com.github.JannikHv.Gydl.desktop</launchable>
+  <url type="homepage">https://github.com/JannikHv/gydl</url>
+  <url type="bugtracker">https://github.com/JannikHv/gydl/issues</url>
+  <url type="help">https://github.com/JannikHv/gydl/blob/master/README.md</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/JannikHv/gydl/master/images/screenshot-01.png</image>
+    </screenshot>
+  </screenshots>
+  <update_contact>contact_AT_hembas.se</update_contact>
+</component>
