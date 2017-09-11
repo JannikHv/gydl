@@ -67,10 +67,10 @@ gboolean gydl_download_video(const gchar *url,
 
         command = g_malloc(sizeof(gchar) * len);
 
-        strcpy(command, "youtube-dl --no-playlist -f [height=");
-        strcat(command, quality);
-        strcat(command, "+ext=");
+        strcpy(command, "youtube-dl --no-playlist -f [ext=");
         strcat(command, format);
+        strcat(command, "+height=");
+        strcat(command, quality);
         strcat(command, "] -o \"");
         strcat(command, dl_dir);
         strcat(command, "/%(title)s.%(ext)s\" \"");

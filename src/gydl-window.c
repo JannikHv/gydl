@@ -55,15 +55,14 @@ static void download_button_clicked(GtkWidget *button,
         visible_child = gtk_stack_get_visible_child_name(GTK_STACK(win->stack));
 
         /* Try to download audio/video */
-        if (g_strcmp0(visible_child, GYDL_STACK_NAME_AUDIO) == 0) {
+        if (g_strcmp0(visible_child, GYDL_STACK_NAME_AUDIO) == 0)
                 dl_status = gydl_download_audio(gydl_view_get_url(win->view_audio),
                                                 gydl_view_get_format(win->view_audio),
                                                 gydl_view_get_quality(win->view_audio));
-        } else {
+        else
                 dl_status = gydl_download_video(gydl_view_get_url(win->view_video),
                                                 gydl_view_get_format(win->view_video),
                                                 gydl_view_get_quality(win->view_video));
-        }
 
         /* Check if download was successful */
         if (dl_status)

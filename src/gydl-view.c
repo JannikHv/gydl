@@ -41,7 +41,7 @@ static void gydl_view_audio_init(GydlView *view)
         gint i;
 
         const gchar *format[5] = {
-                "aac", "m4a", "mp3", "ogg", "wav"
+                "aac", "m4a", "mp3", "vorbis", "wav"
         };
 
         const gchar *quality[10] = {
@@ -170,7 +170,30 @@ const gchar *gydl_view_get_format(GydlView *view)
 
 const gchar *gydl_view_get_quality(GydlView *view)
 {
-        return gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(view->cb_quality));
+        gint id;
+
+        id = gtk_combo_box_get_active(GTK_COMBO_BOX(view->cb_quality));
+
+        switch (id) {
+        case 0:
+                return "2160";
+        case 1:
+                return "1440";
+        case 2:
+                return "1080";
+        case 3:
+                return "720";
+        case 4:
+                return "480";
+        case 5:
+                return "360";
+        case 6:
+                return "240";
+        case 7:
+                return "144";
+        default:
+                return NULL;
+        }
 }
 
 GydlView *gydl_view_new(GydlViewType type)
