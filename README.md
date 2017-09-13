@@ -23,6 +23,17 @@ Thanks for your patience.
 * [Arch Linux](https://aur.archlinux.org/packages/gydl-git/)
   (Credit: [AffeAli](https://github.com/AffeAli))
 
+## Flatpak
+
+[Flatpak](http://flatpak.org) packages support multiple distributions and are sandboxed.
+
+Stable releases are hosted on [Flathub](https://flathub.org):
+
+```
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.github.JannikHv.Gydl
+```
+
 ## Source
 
 Gydl is written in Python3 and uses the GTK+3 toolkit.
