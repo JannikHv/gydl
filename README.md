@@ -27,12 +27,65 @@ Thanks for your patience.
 
 Gydl is written in Python3 and uses the GTK+3 toolkit.
 
+### Dependencies
+
 To run it you need to have installed:
 
 * gtk+3
 * python3
 * pygobject
 * youtube-dl
+
+### Build & Install
+
+Meson installs to `/usr/local` as the default prefix.
+
+```
+meson build
+cd build
+ninja install
+```
+
+### Build Options
+
+Use `meson --help` to get all build options. You may specify any option when
+you initially run meson.
+
+```
+# Example
+meson build --prefix=/app
+```
+
+If you already have a build directory, you must use instead use
+`meson configure`, from within the build directory.
+
+```
+# Example
+cd build
+meson configure -Dprefix=/app
+```
+
+Meson also supports the **DESTDIR** environment variable, which is useful for
+building a package.
+
+[See Meson documentation for more](http://mesonbuild.com)
+
+
+# Translation
+
+Gydl itself is currently not translatable, but the appdata and
+the desktop entry is.
+
+Use the build system to generate a POT template file from the latest commit.
+
+```
+meson build
+ninja -C build Gydl-pot
+rm -rf build
+```
+
+Copy the POT file into a PO file matching your language code and translate
+all strings. Alternatively follow the above steps and use a tool like Poedit.
 
 # Usage
 
