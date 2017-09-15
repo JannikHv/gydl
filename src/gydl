@@ -130,7 +130,7 @@ class GydlMainGui(Gtk.Window):
     def prepareVideo(self, DownloadDir):
 
         # Prepare the command
-        Cmd = ("youtube-dl --no-playlist -f FFF -f [height=QQQ] "
+        Cmd = ("youtube-dl --no-playlist -f [ext=FFF+height=QQQ]"
                + "-o \""
                + DownloadDir
                + "/%(title)s.%(ext)s\" \"UUU\"")
