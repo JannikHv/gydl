@@ -14,13 +14,11 @@ __license__    = "GPLv2"
 
 
 import gi
+import socket
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import Gio
-from gi.repository import GLib
-from subprocess    import call as subcall
+from gi.repository import (Gtk, Gdk, Gio, GLib)
+from subprocess import call as subcall
 
 
 
@@ -28,14 +26,21 @@ def GydlQuit(Widget, Data):
     Gtk.main_quit()
     quit()
 
+def getConnectionActive():
+    try:
+        host = socket.gethostbyname("google.com")
+        sock = socket.create_connection((host, 80), 2)
+        return True
+    except:
+        pass
 
+    return False
 
 class GydlMessageGui(Gtk.Window):
 
     def returnHome(self, Widget, Data):
         self.close()
         execMain()
-
 
     def closeWindow(self, Widget, Data):
         self.close()
@@ -67,22 +72,22 @@ class GydlMessageGui(Gtk.Window):
 
         # Configure the headerbar
         hBar.set_show_close_button(False)
-        hBar.set_custom_title     (Label)
-        hBar.pack_start           (B_exit)
-        hBar.pack_end             (B_done)
+        hBar.set_custom_title(Label)
+        hBar.pack_start(B_exit)
+        hBar.pack_end(B_done)
 
         return hBar
 
     def __init__(self, Title, Message, Image):
 
         # Configure the window
-        Gtk.Window.__init__  (self)
+        Gtk.Window.__init__(self)
         self.set_default_size(420, 120)
-        self.set_resizable   (False)
+        self.set_resizable(False)
         self.set_border_width(10)
-        self.set_titlebar    (self.getHeaderBar(Title, Image))
-        self.set_position    (Gtk.WindowPosition.CENTER)
-        self.set_icon_name   ("gydl")
+        self.set_titlebar(self.getHeaderBar(Title, Image))
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_icon_name("gydl")
 
         self.add(self.getLayout(Message))
         self.show_all()
@@ -163,24 +168,7 @@ class GydlMainGui(Gtk.Window):
         # Set download directory
         DownloadDir = GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
 
-        # Check internet connection
-        try:
-            Gio.NetworkMonitor.can_reach(Gio.NetworkMonitor.get_default(),
-                                         Gio.NetworkAddress.new("google.com", 0),
-                                         Gio.Cancellable.new())
-
-            # Hide the main window
-            self.hide()
-            Gdk.flush()
-
-            # Procceed to either Video or Audio download
-            if Stack.get_visible_child_name() == "V":
-                self.prepareVideo(DownloadDir)
-            else:
-                self.prepareAudio(DownloadDir)
-
-        except GLib.Error:
-
+        if not getConnectionActive():
             # Show Connection error dialog
             Title   = ("Connection Error")
             Message = ("No internet connection has been established.\n"
@@ -192,6 +180,16 @@ class GydlMainGui(Gtk.Window):
                       Gtk.IconSize.BUTTON)
 
             GydlMessageGui(Title, Message, Image)
+        else:
+            # Hide the main window
+            self.hide()
+            Gdk.flush()
+
+            # Procceed to either Video or Audio download
+            if Stack.get_visible_child_name() == "V":
+                self.prepareVideo(DownloadDir)
+            else:
+                self.prepareAudio(DownloadDir)
 
     def getVideoArea(self):
 
@@ -339,14 +337,14 @@ class GydlMainGui(Gtk.Window):
         Stack  = Gtk.Stack()
 
         # Configure the window
-        Gtk.Window.__init__  (self)
+        Gtk.Window.__init__(self)
         self.set_default_size(530, 250)
-        self.set_resizable   (True)
+        self.set_resizable(True)
         self.set_border_width(10)
-        self.set_titlebar    (self.getHeaderBar(Switch, Stack))
-        self.set_position    (Gtk.WindowPosition.CENTER)
-        self.set_icon_name   ("gydl")
-        self.setStyle        (Stack)
+        self.set_titlebar(self.getHeaderBar(Switch, Stack))
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_icon_name("gydl")
+        self.setStyle(Stack)
 
         Stack.add_titled(self.getAudioArea(), "A", "Audio")
         Stack.add_titled(self.getVideoArea(), "V", "Video")
