@@ -95,8 +95,8 @@ static void gydl_dialog_init(GydlDialog *dialog,
         gtk_window_set_icon_name(GTK_WINDOW(dialog->self), "gydl");
         gtk_container_add(GTK_CONTAINER(dialog->self), dialog->grid);
         g_signal_connect(dialog->self,
-                         "destroy",
-                         G_CALLBACK(gtk_main_quit),
+                         "delete-event",
+                         gtk_main_quit,
                          NULL);
 
         /* Header bar */
