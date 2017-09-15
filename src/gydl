@@ -160,15 +160,14 @@ class GydlMainGui(Gtk.Window):
         self.downloadMain(Cmd, "audio", DownloadDir)
 
     def prepareDownload(self, widget, Stack):
+        # Set download directory
+        DownloadDir = GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
 
         # Check internet connection
         try:
             Gio.NetworkMonitor.can_reach(Gio.NetworkMonitor.get_default(),
                                          Gio.NetworkAddress.new("google.com", 0),
                                          Gio.Cancellable.new())
-
-            # Set download directory
-            DownloadDir = GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
 
             # Hide the main window
             self.hide()
