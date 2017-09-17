@@ -20,7 +20,7 @@ message('Getting python install path')
 py3_dir = py3_mod.sysconfig_path('purelib')
 
 message('Installing Gydl')
-install_data('src/gydl', install_dir: bindir)
+install_data('src/gydl.py', install_dir: bindir)
 
 message('Installing data files')
 subdir('data')
