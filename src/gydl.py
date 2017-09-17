@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 
+__author__     = "Jannik Hauptvogel"
+__maintainer__ = "Jannik Hauptvogel"
+__email__      = "JannikHv@gmail.com"
+__twitter__    = "https://twitter.com/JannikHv"
+__git__        = "https://github.com/JannikHv/gydl"
+__aur__        = "https://aur.archlinux.org/packages/gydl-git/"
+__credits__    = "rg3"
+__license__    = "GPLv2"
+
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import (Gtk, Gdk, GLib, Gio)
 from os import system
-
-
 
 class Gydl:
     class DialogType:
