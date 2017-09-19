@@ -40,8 +40,6 @@ gboolean gydl_download_get_audio(const gchar *url,
         strcat(cmd, url);
         strcat(cmd, "\"");
 
-        printf("%s\n", cmd);
-
         return (system(cmd) == 0) ? TRUE : FALSE;
 }
 
@@ -72,8 +70,6 @@ gboolean gydl_download_get_video(const gchar *url,
         strcat(cmd, "/%(title)s.%(ext)s\" \"");
         strcat(cmd, url);
         strcat(cmd, "\"");
-
-        printf("%s\n", cmd);
 
         return (system(cmd) == 0) ? TRUE : FALSE;
 }
