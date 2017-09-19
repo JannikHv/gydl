@@ -1,24 +1,19 @@
 #ifndef __GYDL_DIALOG_H__
 #define __GYDL_DIALOG_H__
 
-#include "gydl-window.h"
-
 #include <gtk/gtk.h>
 
 typedef struct _GydlDialog GydlDialog;
 
 typedef enum {
-        GYDL_DIALOG_TYPE_NET_ERR,
-        GYDL_DIALOG_TYPE_DL_FAIL,
-        GYDL_DIALOG_TYPE_DL_SUCCESS,
+        GYDL_DIALOG_TYPE_NET_ERROR,
+        GYDL_DIALOG_TYPE_DL_ERROR,
+        GYDL_DIALOG_TYPE_DL_FINISH,
 } GydlDialogType;
 
-GtkWidget       *gydl_dialog_get_window                 (GydlDialog *dialog);
+GtkWidget       *gydl_dialog_get_window (GydlDialog *dialog);
 
-void             gydl_dialog_set_window                 (GydlDialog *dialog,
-                                                         GydlWindow *window);
-
-GydlDialog      *gydl_dialog_new                        (GydlDialogType);
+GydlDialog      *gydl_dialog_new        (GydlDialogType dialog_type);
 
 #endif /* __GYDL_DIALOG_H__ */
 

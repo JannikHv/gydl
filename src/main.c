@@ -7,11 +7,11 @@ gint main(gint argc,
 {
         gtk_init(&argc, &argv);
 
-        GydlWindow *win;
+        GtkWidget *win;
 
         win = gydl_window_new();
 
-        gydl_window_show_all(win);
+        gtk_widget_show_all(win);
 
         gtk_main();
 }

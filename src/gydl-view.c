@@ -1,14 +1,13 @@
 #include "gydl-view.h"
 
 #include <gtk/gtk.h>
-#include <string.h>
 
-struct _GydlView {
-        /* Container */
-        GtkWidget *grid;
+struct _GydlView  {
+        /* Containers */
+        GtkWidget *self;
 
         /* Labels */
-        GtkWidget *l_url;
+        GtkWidget *l_entry;
         GtkWidget *l_format;
         GtkWidget *l_quality;
 
@@ -16,99 +15,58 @@ struct _GydlView {
         GtkWidget *entry;
         GtkWidget *cb_format;
         GtkWidget *cb_quality;
+
+        /* Type */
+        GydlViewType type;
 };
 
-static const gchar *get_markup_from_text(const gchar *text)
+static void gydl_audio_view_init(GydlView *view)
 {
-        gint len;
-        gchar *markup;
-
-        len = strlen(text);
-        len += 36;
-
-        markup = g_malloc(sizeof(gchar) * len);
-
-        strcpy(markup, "<span size='15000'><u>\n");
-        strcat(markup, text);
-        strcat(markup, "\n</u></span>");
-
-        return markup;
-}
-
-static void gydl_view_audio_init(GydlView *view)
-{
-        GtkComboBoxText *cb_format, *cb_quality;
         gint i;
-
-        const gchar *format[5] = {
-                "aac", "m4a", "mp3", "vorbis", "wav"
-        };
-
+        const gchar *format[5] = {"aac", "m4a", "mp3", "vorbis", "wav"};
         const gchar *quality[10] = {
-                "0", "1", "2", "3", "4",
-                "5", "6", "7", "8", "9",
+                "0 (best)", "1", "2", "3", "4",
+                "5", "6", "7", "8", "9 (worst)"
         };
-
-        cb_format = GTK_COMBO_BOX_TEXT(view->cb_format);
-        cb_quality = GTK_COMBO_BOX_TEXT(view->cb_quality);
 
         for (i = 0; i < 5; i++)
-                gtk_combo_box_text_append_text(cb_format, format[i]);
+                gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(view->cb_format),
+                                               format[i]);
 
         for (i = 0; i < 10; i++)
-                gtk_combo_box_text_append_text(cb_quality, quality[i]);
+                gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(view->cb_quality),
+                                               quality[i]);
 
-        gtk_combo_box_set_active(GTK_COMBO_BOX(cb_format), 2);
-        gtk_combo_box_set_active(GTK_COMBO_BOX(cb_quality), 5);
+        gtk_combo_box_set_active(GTK_COMBO_BOX(view->cb_format), 2);
+        gtk_combo_box_set_active(GTK_COMBO_BOX(view->cb_quality), 5);
 }
 
-static void gydl_view_video_init(GydlView *view)
+static void gydl_video_view_init(GydlView *view)
 {
-        GtkComboBoxText *cb_format, *cb_quality;
         gint i;
-
-        const gchar *format[4] = {
-                "3gp", "flv", "mp4", "webm",
-        };
-
+        const gchar *format[4] = {"3gp", "flv", "mp4", "webm"};
         const gchar *quality[8] = {
                 "2160p", "1440p", "1080p", "720p",
-                "480p", "360p", "240p", "144p",
+                "480p", "360p", "240p", "144p"
         };
 
-        cb_format = GTK_COMBO_BOX_TEXT(view->cb_format);
-        cb_quality = GTK_COMBO_BOX_TEXT(view->cb_quality);
-
         for (i = 0; i < 4; i++)
-                gtk_combo_box_text_append_text(cb_format, format[i]);
+                gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(view->cb_format),
+                                               format[i]);
 
         for (i = 0; i < 8; i++)
-                gtk_combo_box_text_append_text(cb_quality, quality[i]);
+                gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(view->cb_quality),
+                                               quality[i]);
 
-        gtk_combo_box_set_active(GTK_COMBO_BOX(cb_format), 2);
-        gtk_combo_box_set_active(GTK_COMBO_BOX(cb_quality), 3);
+        gtk_combo_box_set_active(GTK_COMBO_BOX(view->cb_format), 2);
+        gtk_combo_box_set_active(GTK_COMBO_BOX(view->cb_quality), 3);
 }
 
-static void gydl_view_add_interface(GydlView *view)
+static void gydl_view_init(GydlView *view)
 {
-        GtkGrid *grid;
+        view->self = gtk_grid_new();
 
-        grid = GTK_GRID(view->grid);
-
-        gtk_grid_attach(grid, view->l_url, 0, 0, 4, 1);
-        gtk_grid_attach(grid, view->entry, 0, 1, 4, 1);
-        gtk_grid_attach(grid, view->l_format, 0, 2, 2, 1);
-        gtk_grid_attach(grid, view->l_quality, 2, 2, 2, 1);
-        gtk_grid_attach(grid, view->cb_format, 0, 3, 2, 1);
-        gtk_grid_attach(grid, view->cb_quality, 2, 3, 2, 1);
-}
-
-static void gydl_view_init(GydlView *view,
-                           GydlViewType type)
-{
-        view->grid = gtk_grid_new();
-
-        view->l_url     = gtk_label_new(NULL);
+        view->l_entry   = gtk_label_new(NULL);
         view->l_format  = gtk_label_new(NULL);
         view->l_quality = gtk_label_new(NULL);
 
@@ -117,16 +75,16 @@ static void gydl_view_init(GydlView *view,
         view->cb_quality = gtk_combo_box_text_new();
 
         /* Grid */
-        gtk_grid_set_column_homogeneous(GTK_GRID(view->grid), TRUE);
-        gtk_container_set_border_width(GTK_CONTAINER(view->grid), 10);
+        gtk_grid_set_column_homogeneous(GTK_GRID(view->self), TRUE);
+        gtk_container_set_border_width(GTK_CONTAINER(view->self), 10);
 
         /* Labels */
-        gtk_label_set_markup(GTK_LABEL(view->l_url),
-                             get_markup_from_text("Enter the URL"));
+        gtk_label_set_markup(GTK_LABEL(view->l_entry),
+                             "<span size='15000'><u>\nEnter the URL\n</u></span>");
         gtk_label_set_markup(GTK_LABEL(view->l_format),
-                             get_markup_from_text("Format"));
+                            "<span size='15000'><u>\nFormat\n</u></span>");
         gtk_label_set_markup(GTK_LABEL(view->l_quality),
-                             get_markup_from_text("Quality"));
+                             "<span size='15000'><u>\nQuality\n</u></span>");
 
         /* Entry */
         gtk_entry_set_placeholder_text(GTK_ENTRY(view->entry),
@@ -136,18 +94,24 @@ static void gydl_view_init(GydlView *view,
         gtk_container_set_border_width(GTK_CONTAINER(view->cb_format), 5);
         gtk_container_set_border_width(GTK_CONTAINER(view->cb_quality), 5);
 
-        switch (type) {
+        /* Attach widgets to grid */
+        gtk_grid_attach(GTK_GRID(view->self), view->l_entry, 0, 0, 4, 1);
+        gtk_grid_attach(GTK_GRID(view->self), view->entry, 0, 1, 4, 1);
+        gtk_grid_attach(GTK_GRID(view->self), view->l_format, 0, 2, 2, 1);
+        gtk_grid_attach(GTK_GRID(view->self), view->l_quality, 2, 2, 2, 1);
+        gtk_grid_attach(GTK_GRID(view->self), view->cb_format, 0, 3, 2, 1);
+        gtk_grid_attach(GTK_GRID(view->self), view->cb_quality, 2, 3, 2, 1);
+
+        switch (view->type) {
         case GYDL_VIEW_TYPE_AUDIO:
-                gydl_view_audio_init(view);
+                gydl_audio_view_init(view);
                 break;
         case GYDL_VIEW_TYPE_VIDEO:
-                gydl_view_video_init(view);
+                gydl_video_view_init(view);
                 break;
         default:
                 break;
         }
-
-        gydl_view_add_interface(view);
 }
 
 /**
@@ -155,7 +119,7 @@ static void gydl_view_init(GydlView *view,
  */
 GtkWidget *gydl_view_get_viewport(GydlView *view)
 {
-        return view->grid;
+        return view->self;
 }
 
 const gchar *gydl_view_get_url(GydlView *view)
@@ -176,33 +140,39 @@ const gchar *gydl_view_get_quality(GydlView *view)
 
         switch (id) {
         case 0:
-                return "2160";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "0" : "2160";
         case 1:
-                return "1440";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "1" : "1440";
         case 2:
-                return "1080";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "2" : "1080";
         case 3:
-                return "720";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "3" : "720";
         case 4:
-                return "480";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "4" : "480";
         case 5:
-                return "360";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "5" : "360";
         case 6:
-                return "240";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "6" : "240";
         case 7:
-                return "144";
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "7" : "144";
+        case 8:
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "8" : NULL;
+        case 9:
+                return (view->type == GYDL_VIEW_TYPE_AUDIO) ? "9" : NULL;
         default:
                 return NULL;
         }
 }
 
-GydlView *gydl_view_new(GydlViewType type)
+GydlView *gydl_view_new(GydlViewType view_type)
 {
         GydlView *view;
 
         view = g_malloc(sizeof(GydlView));
 
-        gydl_view_init(view, type);
+        view->type = view_type;
+
+        gydl_view_init(view);
 
         return view;
 }

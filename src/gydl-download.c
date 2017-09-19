@@ -1,10 +1,10 @@
 #include "gydl-download.h"
 
 #include <gtk/gtk.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-gboolean gydl_download_get_can_connect(const gchar *url)
+gboolean gydl_download_get_can_reach(const gchar *url)
 {
         return g_network_monitor_can_reach(g_network_monitor_get_default(),
                                            g_network_address_new(url, 0),
@@ -12,14 +12,13 @@ gboolean gydl_download_get_can_connect(const gchar *url)
                                            NULL);
 }
 
-gboolean gydl_download_audio(const gchar *url,
-                             const gchar *format,
-                             const gchar *quality)
+gboolean gydl_download_get_audio(const gchar *url,
+                                 const gchar *format,
+                                 const gchar *quality)
 {
-        gchar *command;
-        const gchar *dl_dir;
         gint len;
-        gboolean exit_status;
+        gchar *cmd;
+        const gchar *dl_dir;
 
         dl_dir = g_get_user_special_dir(G_USER_DIRECTORY_DOWNLOAD);
 
@@ -29,59 +28,54 @@ gboolean gydl_download_audio(const gchar *url,
         len += strlen(quality);
         len += strlen(dl_dir);
 
-        command = g_malloc(sizeof(gchar) * len);
+        cmd = g_malloc(sizeof(gchar) * len);
 
-        strcpy(command, "youtube-dl --no-playlist -x --audio-format ");
-        strcat(command, format);
-        strcat(command, " --audio-quality ");
-        strcat(command, quality);
-        strcat(command, " -o \"");
-        strcat(command, dl_dir);
-        strcat(command, "/%(title)s.%(ext)s\" \"");
-        strcat(command, url);
-        strcat(command, "\"");
+        strcpy(cmd, "youtube-dl --no-playlist -x --audio-format ");
+        strcat(cmd, format);
+        strcat(cmd, " --audio-quality ");
+        strcat(cmd, quality);
+        strcat(cmd, " -o \"");
+        strcat(cmd, dl_dir);
+        strcat(cmd, "/%(title)s.%(ext)s\" \"");
+        strcat(cmd, url);
+        strcat(cmd, "\"");
 
-        exit_status = (system(command) == 0) ? TRUE : FALSE;
+        printf("%s\n", cmd);
 
-        g_free(command);
-
-        return exit_status;
+        return (system(cmd) == 0) ? TRUE : FALSE;
 }
 
-gboolean gydl_download_video(const gchar *url,
-                             const gchar *format,
-                             const gchar *quality)
+gboolean gydl_download_get_video(const gchar *url,
+                                 const gchar *format,
+                                 const gchar *quality)
 {
-        gchar *command;
-        const gchar *dl_dir;
         gint len;
-        gboolean exit_status;
+        gchar *cmd;
+        const gchar *dl_dir;
 
         dl_dir = g_get_user_special_dir(G_USER_DIRECTORY_DOWNLOAD);
 
-        len = 80;
+        len = 71;
         len += strlen(url);
         len += strlen(format);
         len += strlen(quality);
         len += strlen(dl_dir);
 
-        command = g_malloc(sizeof(gchar) * len);
+        cmd = g_malloc(sizeof(gchar) * len);
 
-        strcpy(command, "youtube-dl --no-playlist -f [ext=");
-        strcat(command, format);
-        strcat(command, "+height=");
-        strcat(command, quality);
-        strcat(command, "] -o \"");
-        strcat(command, dl_dir);
-        strcat(command, "/%(title)s.%(ext)s\" \"");
-        strcat(command, url);
-        strcat(command, "\"");
+        strcpy(cmd, "youtube-dl --no-playlist -f [ext=");
+        strcat(cmd, format);
+        strcat(cmd, "+height=");
+        strcat(cmd, quality);
+        strcat(cmd, "] -o \"");
+        strcat(cmd, dl_dir);
+        strcat(cmd, "/%(title)s.%(ext)s\" \"");
+        strcat(cmd, url);
+        strcat(cmd, "\"");
 
-        exit_status = (system(command) == 0) ? TRUE : FALSE;
+        printf("%s\n", cmd);
 
-        g_free(command);
-
-        return exit_status;
+        return (system(cmd) == 0) ? TRUE : FALSE;
 }
 
 /*

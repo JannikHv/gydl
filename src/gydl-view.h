@@ -19,7 +19,7 @@ const gchar     *gydl_view_get_format   (GydlView *view);
 
 const gchar     *gydl_view_get_quality  (GydlView *view);
 
-GydlView        *gydl_view_new          (GydlViewType type);
+GydlView        *gydl_view_new          (GydlViewType view_type);
 
 #endif /* __GYDL_VIEW_H__ */
 
