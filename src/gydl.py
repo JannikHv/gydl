@@ -119,7 +119,7 @@ class Gydl:
             self.set_position(Gtk.WindowPosition.CENTER)
             self.set_icon_name("gydl")
             self.add(self.grid)
-            self.connect("delete-event", Gtk.main_quit, None)
+            self.connect("destroy", Gtk.main_quit, None)
 
             # Header bar
             self.hbar.set_title(self.__get_title_from_type(dialog_type))
