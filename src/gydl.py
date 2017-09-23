@@ -32,8 +32,8 @@ class Gydl:
         def get_can_reach(self, URL):
             try:
                 Gio.NetworkMonitor.can_reach(Gio.NetworkMonitor.get_default(),
-                                                Gio.NetworkAddress.new(URL, 0),
-                                                Gio.Cancellable.new())
+                                             Gio.NetworkAddress.new(URL, 0),
+                                             Gio.Cancellable.new())
                 return True
             except:
                 pass
