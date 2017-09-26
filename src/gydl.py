@@ -42,11 +42,11 @@ class Gydl:
 
         def get_audio(self, URL, FORMAT, QUALITY):
             cmd = ("youtube-dl --no-playlist -x "
-                + "--audio-format FFF "
-                + "--audio-quality QQQ "
-                + "-o \""
-                + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
-                + "/%(title)s.%(ext)s\" \"UUU\"")
+                 + "--audio-format FFF "
+                 + "--audio-quality QQQ "
+                 + "-o \""
+                 + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
+                 + "/%(title)s.%(ext)s\" \"UUU\"")
 
             cmd = cmd.replace("FFF", FORMAT)
             cmd = cmd.replace("QQQ", QUALITY)
@@ -59,10 +59,10 @@ class Gydl:
 
         def get_video(self, URL, FORMAT, QUALITY):
             cmd = ("youtube-dl --no-playlist "
-                + "-f [ext=FFF+height=QQQ] "
-                + "-o \""
-                + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
-                + "/%(title)s.%(ext)s\" \"UUU\"")
+                 + "-f [ext=FFF+height=QQQ] "
+                 + "-o \""
+                 + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
+                 + "/%(title)s.%(ext)s\" \"UUU\"")
 
             cmd = cmd.replace("FFF", FORMAT)
             cmd = cmd.replace("QQQ", QUALITY.replace("p", ""))
@@ -236,7 +236,7 @@ class Gydl:
 
             # Check internet connection
             if not self.downloader.get_can_reach("youtube.com"):
-                dialog = GydlDialog(Gydl.DialogType.NET_ERROR)
+                dialog = Gydl.Dialog(Gydl.DialogType.NET_ERROR)
                 dialog.show_all()
                 dialog.connect("delete-event", self.__dialog_closed, None)
                 return
