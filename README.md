@@ -12,9 +12,9 @@ https://github.com/rg3/youtube-dl
 
 # News!
 
-Gydl is receiving a rewrite to C. When it's stable, the work on a new design is starting.
+The C-Rewrite is finished but we're leaving the Python 3 version as the master branch for now.
 
-Thanks for your patience.
+A new Python 3 rewrite is coming up where you'll be able to see that a download is actually running.
 
 # Installation
 
