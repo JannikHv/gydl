@@ -148,11 +148,11 @@ class Gydl:
             for entry in ["aac", "m4a", "mp3", "vorbis", "wav"]:
                 self.format.append_text(entry)
 
-            for entry in range(0, 10):
-                self.quality.append_text(str(entry))
+            for entry in ["0 (Best)", "1", "2", "3", "4", "5 (Average)", "6", "7", "8", "9 (Smallest)"]:
+                self.quality.append_text(entry)
 
             self.format.set_active(2)
-            self.quality.set_active(5)
+            self.quality.set_active(0)
 
         def __build_video(self):
             for entry in ["3gp", "flv", "mp4", "webm"]:
@@ -172,7 +172,7 @@ class Gydl:
             return self.format.get_active_text()
 
         def get_quality(self):
-            return self.quality.get_active_text()
+            return self.quality.get_active_text()[0]
 
         def __init__(self, view_type):
             Gtk.Grid.__init__(self)
