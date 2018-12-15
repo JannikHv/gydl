@@ -110,8 +110,8 @@ class Gydl:
             self.grid = Gtk.Grid()
 
             self.label        = Gtk.Label(None)
-            self.btn_leave    = Gtk.Button.new_with_label("Leave")
-            self.btn_continue = Gtk.Button.new_with_label("Continue")
+            self.btn_leave    = Gtk.Button.new_with_mnemonic("_Leave")
+            self.btn_continue = Gtk.Button.new_with_mnemonic("_Continue")
 
             # Window
             self.set_default_size(400, 200)
@@ -272,8 +272,8 @@ class Gydl:
             self.view_video = Gydl.View(Gydl.ViewType.VIDEO)
 
             self.switcher = Gtk.StackSwitcher()
-            self.btn_lv   = Gtk.Button.new_with_label("Leave")
-            self.btn_dl   = Gtk.Button.new_with_label("Download")
+            self.btn_lv   = Gtk.Button.new_with_mnemonic("_Leave")
+            self.btn_dl   = Gtk.Button.new_with_mnemonic("_Download")
 
             # Window
             self.set_default_size(525, 275)
