@@ -12,9 +12,13 @@ https://github.com/rg3/youtube-dl
 
 # News!
 
-The C-Rewrite is finished but we're leaving the Python 3 version as the master branch for now.
+Fellow users,
 
-A new Python 3 rewrite is coming up where you'll be able to see that a download is actually running.
+Gydl is currently in a state where it is not worth enhancing/developing it in any way.
+
+I currently don't have the resources to develop Gydl myself - thus the amount of open issues.
+
+I plan on keeping Gydl stable for how it currently is/works and rewrite it completely in about half a year at the latest.
 
 # Installation
 
