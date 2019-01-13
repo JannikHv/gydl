@@ -109,7 +109,7 @@ class Gydl:
             self.hbar = Gtk.HeaderBar()
             self.grid = Gtk.Grid()
 
-            self.label        = Gtk.Label(None)
+            self.label        = Gtk.Label()
             self.btn_leave    = Gtk.Button.new_with_mnemonic("_Leave")
             self.btn_continue = Gtk.Button.new_with_mnemonic("_Continue")
 
@@ -148,7 +148,7 @@ class Gydl:
             for entry in ["aac", "m4a", "mp3", "vorbis", "wav"]:
                 self.format.append_text(entry)
 
-            for entry in ["0 (Best)", "1", "2", "3", "4", "5 (Average)", "6", "7", "8", "9 (Smallest)"]:
+            for entry in ["0 (Best)", "1", "2", "3", "4", "5 (Average)", "6", "7", "8", "9 (Worst)"]:
                 self.quality.append_text(entry)
 
             self.format.set_active(2)
@@ -177,9 +177,9 @@ class Gydl:
         def __init__(self, view_type):
             Gtk.Grid.__init__(self)
 
-            self.l_entry   = Gtk.Label(None)
-            self.l_format  = Gtk.Label(None)
-            self.l_quality = Gtk.Label(None)
+            self.l_entry   = Gtk.Label()
+            self.l_format  = Gtk.Label()
+            self.l_quality = Gtk.Label()
 
             self.entry   = Gtk.Entry()
             self.format  = Gtk.ComboBoxText()
