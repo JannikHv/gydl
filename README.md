@@ -29,7 +29,9 @@ I plan on keeping Gydl stable for how it currently is/works and rewrite it compl
 
 ## Flatpak
 
-[Flatpak](http://flatpak.org) packages support multiple distributions and are sandboxed.
+[![Packaging status](https://repology.org/badge/vertical-allrepos/gydl.svg)](https://repology.org/project/gydl/versions)
+
+- [Flatpak](http://flatpak.org) packages support multiple distributions and are sandboxed.
 
 Stable releases are hosted on [Flathub](https://flathub.org):
 
@@ -37,6 +39,8 @@ Stable releases are hosted on [Flathub](https://flathub.org):
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.github.JannikHv.Gydl
 ```
+
+- [Fedora](https://apps.fedoraproject.org/packages/gydl): `sudo dnf install gydl`
 
 ## Source
 
