@@ -22,7 +22,7 @@
       A big thank you to the developer(s).
     </p>
   </description>
-  <launchable>com.github.JannikHv.Gydl.desktop</launchable>
+  <launchable type="desktop-id">com.github.JannikHv.Gydl.desktop</launchable>
   <url type="homepage">https://github.com/JannikHv/gydl</url>
   <url type="bugtracker">https://github.com/JannikHv/gydl/issues</url>
   <url type="help">https://github.com/JannikHv/gydl/blob/master/README.md</url>
