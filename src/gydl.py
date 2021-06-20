@@ -172,7 +172,7 @@ class Gydl:
             return self.format.get_active_text()
 
         def get_quality(self):
-            return self.quality.get_active_text()[0]
+            return self.quality.get_active_text()
 
         def __init__(self, view_type):
             Gtk.Grid.__init__(self)
