@@ -171,7 +171,10 @@ class Gydl:
         def get_format(self):
             return self.format.get_active_text()
 
-        def get_quality(self):
+        def get_aquality(self):
+            return self.quality.get_active_text()[0]
+
+        def get_vquality(self):
             return self.quality.get_active_text()
 
         def __init__(self, view_type):
@@ -245,11 +248,11 @@ class Gydl:
             if self.stack.get_visible_child_name() == "Audio":
                 dl_exit = self.downloader.get_audio(self.view_audio.get_url(),
                                                     self.view_audio.get_format(),
-                                                    self.view_audio.get_quality())
+                                                    self.view_audio.get_aquality())
             elif self.stack.get_visible_child_name() == "Video":
                 dl_exit = self.downloader.get_video(self.view_video.get_url(),
                                                     self.view_video.get_format(),
-                                                    self.view_video.get_quality())
+                                                    self.view_video.get_vquality())
             else:
                 dl_exit = False
 
