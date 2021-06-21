@@ -13,6 +13,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import (Gtk, Gdk, GLib, Gio)
 from os import system
+from subprocess import Popen, PIPE
 
 class Gydl:
     class DialogType:
@@ -51,23 +52,25 @@ class Gydl:
             cmd = cmd.replace("FFF", FORMAT)
             cmd = cmd.replace("QQQ", QUALITY)
             cmd = cmd.replace("UUU", URL)
-
             if system(cmd) is 0:
                 return True
             else:
                 return False
 
         def get_video(self, URL, FORMAT, QUALITY):
+            pre = ("youtube-dl --no-playlist -F \"" + URL + "\"| grep " + FORMAT + " | grep " + QUALITY + " | cut -f 1 -d ' ' | tail -n 1")
+            settings = Popen(pre, shell = True,stdout=PIPE).communicate()[0]
+            settings="".join(map(chr, settings)).rstrip("\n")
+            if settings=="":
+                 settings = "best"
             cmd = ("youtube-dl --no-playlist "
-                 + "-f [ext=FFF+height=QQQ] "
-                 + "-o \""
+                 + "-f " 
+                 + settings
+                 + " -o \""
                  + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
                  + "/%(title)s.%(ext)s\" \"UUU\"")
 
-            cmd = cmd.replace("FFF", FORMAT)
-            cmd = cmd.replace("QQQ", QUALITY.replace("p", ""))
             cmd = cmd.replace("UUU", URL)
-
             if system(cmd) is 0:
                 return True
             else:
@@ -96,7 +99,7 @@ class Gydl:
                       + "Make sure you're connected to the internet.")
             elif dialog_type is Gydl.DialogType.DL_ERROR:
                 return ("The download has been unsuccessful.\n"
-                      + "Make sure the URL you've entered is valid.")
+                      + "Make sure the URL you've entered is valid."
             elif dialog_type is Gydl.DialogType.DL_FINISH:
                 return ("The download has been successful.\n"
                       + "The file has been saved in your download folder.")
