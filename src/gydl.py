@@ -99,7 +99,7 @@ class Gydl:
                       + "Make sure you're connected to the internet.")
             elif dialog_type is Gydl.DialogType.DL_ERROR:
                 return ("The download has been unsuccessful.\n"
-                      + "Make sure the URL you've entered is valid."
+                      + "Make sure the URL you've entered is valid.")
             elif dialog_type is Gydl.DialogType.DL_FINISH:
                 return ("The download has been successful.\n"
                       + "The file has been saved in your download folder.")
