@@ -41,7 +41,7 @@ class Gydl:
             return False
 
         def get_audio(self, URL, FORMAT, QUALITY):
-            cmd = ("youtube-dl --no-playlist -x "
+            cmd = ("yt-dlp --no-playlist -x "
                  + "--audio-format FFF "
                  + "--audio-quality QQQ "
                  + "-o \""
@@ -58,7 +58,7 @@ class Gydl:
                 return False
 
         def get_video(self, URL, FORMAT, QUALITY):
-            cmd = ("youtube-dl --no-playlist "
+            cmd = ("yt-dlp --no-playlist "
                  + "-f [ext=FFF+height=QQQ] "
                  + "-o \""
                  + GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)
