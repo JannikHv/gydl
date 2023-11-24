@@ -1,14 +1,19 @@
 # About
 
-Gydl (Graphical Youtube-dl) is a GUI wrapper around the already existing
-youtube-dl program.
+Gydl (Graphical yt-dlp) is a GUI wrapper around the already existing
+yt-dlp program.
 
 It's developed with a dialog driven experience in mind. This provides a quick
 and easy video or audio downloads without disturbances.
 
-Big **thank you** to the developer(s) of youtube-dl! Check out their project:
+Big **thank you** to the developer(s) of yt-dlp! Check out their project:
+
+https://github.com/yt-dlp/yt-dlp
+
+based on youtube-dl:
 
 https://github.com/rg3/youtube-dl
+
 
 # News!
 
@@ -53,7 +58,7 @@ To run it you need to have installed:
 * gtk+3
 * python3
 * pygobject
-* youtube-dl
+* yt-dlp
 
 ### Build & Install
 

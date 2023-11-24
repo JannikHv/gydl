@@ -9,7 +9,7 @@ message('Checking dependencies')
 py3 = py3_mod.find_python()
 gtk3 = dependency('gtk+-3.0')
 pygo = dependency('pygobject-3.0')
-ydl = find_program('youtube-dl')
+ydl = find_program('yt-dlp')
 
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))

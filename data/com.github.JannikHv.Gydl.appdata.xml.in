@@ -9,7 +9,7 @@
   <developer_name>Jannik Hauptvogel</developer_name>
   <description>
     <p>
-      Gydl (Graphical youtube-dl) is a tool that enables downloading of content from
+      Gydl (Graphical yt-dlp) is a tool that enables downloading of content from
       YouTube and many other sites. It provides a minimal interface based on dialogues,
       making it quick and easy to download multimedia content.
     </p>
@@ -18,7 +18,7 @@
       selected format is not available at the source, Gydl will attempt to convert it.
     </p>
     <p>
-      Gydl is based upon the popular youtube-dl program, which can be found on GitHub.
+      Gydl is based upon the popular yt-dlp program, which can be found on GitHub.
       A big thank you to the developer(s).
     </p>
   </description>
