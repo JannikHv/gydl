@@ -52,4 +52,11 @@
   </releases>
   <update_contact>contact_AT_hembas.se</update_contact>
   <translation type="gettext">Gydl</translation>
+  <keywords>
+    <keyword>youtube downloader</keyword>
+    <keyword>video converter</keyword>
+    <keyword>audio downloader</keyword>
+    <keyword>online media downloader</keyword>
+    <keyword>content grabber</keyword>
+  </keywords>
 </component>
